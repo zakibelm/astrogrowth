@@ -224,3 +224,10 @@
 - [x] Vérifier que AppLayout est bien appliqué à toutes les pages
 - [x] Vérifier le z-index et le positionnement du bottom nav
 - [x] S'assurer que le menu est visible sur mobile et desktop
+
+
+## 🐛 CORRECTION NAVIGATION
+
+- [x] Les clics sur les onglets du menu ne changent pas de page (navigation par URL fonctionne)
+- [x] Vérifier le code de setLocation dans BottomNav
+- [x] Tester la navigation vers toutes les pages (Campagnes, Contenus, Profil)
