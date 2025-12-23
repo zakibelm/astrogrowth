@@ -1,5 +1,5 @@
 import { useLocation } from "wouter";
-import { Home, BarChart3, FileText, User } from "lucide-react";
+import { Home, BarChart3, FileText, User, TrendingUp } from "lucide-react";
 
 /**
  * Bottom Navigation Bar pour mobile
@@ -18,6 +18,11 @@ export default function BottomNav() {
       icon: BarChart3,
       label: "Campagnes",
       path: "/campaigns",
+    },
+    {
+      icon: TrendingUp,
+      label: "Analytics",
+      path: "/analytics",
     },
     {
       icon: FileText,

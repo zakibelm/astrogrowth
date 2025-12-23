@@ -231,3 +231,15 @@
 - [x] Les clics sur les onglets du menu ne changent pas de page (navigation par URL fonctionne)
 - [x] Vérifier le code de setLocation dans BottomNav
 - [x] Tester la navigation vers toutes les pages (Campagnes, Contenus, Profil)
+
+
+## 📏 PAGES MANQUANTES À CRÉER
+
+Selon les maquettes fournies :
+
+- [x] Page Analytics avec graphiques (visible dans les maquettes)
+- [x] Page de liste de leads détaillée avec filtres
+- [ ] Page de création de contenu (formulaire)
+- [ ] Page de paramètres/configuration
+- [ ] Page de notifications
+- [x] Compléter le menu avec tous les onglets nécessaires (5 onglets maintenant)

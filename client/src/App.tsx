@@ -14,6 +14,7 @@ import ContentApproval from "./pages/ContentApproval";
 import Campaigns from "./pages/Campaigns";
 import Contents from "./pages/Contents";
 import Profile from "./pages/Profile";
+import Analytics from "./pages/Analytics";
 import AppLayout from "./components/AppLayout";
 
 function Router() {
@@ -46,6 +47,9 @@ function Router() {
       </Route>
       <Route path={"/profile"}>
         <AppLayout><Profile /></AppLayout>
+      </Route>
+      <Route path={"/analytics"}>
+        <AppLayout><Analytics /></AppLayout>
       </Route>
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
