@@ -295,3 +295,12 @@ Selon les maquettes fournies :
 - [ ] Créer service AgentOrchestrator en Python
 - [ ] Implémenter exécution de workflow avec logging
 - [ ] Ajouter fallbacks et retry logic
+
+
+## 🔧 CORRECTION MENU NAVIGATION
+
+- [x] Ajouter Paramètres au menu de navigation (remplacé Profil par Paramètres)
+- [x] Équipe d'Agents accessible depuis la page Paramètres
+- [x] Connexions Plateformes accessible depuis la page Paramètres
+- [x] Workflows accessible depuis la page Paramètres
+- [x] Décider si ces pages vont dans le bottom nav ou dans un menu hamburger/settings (choisi: Paramètres dans bottom nav)
