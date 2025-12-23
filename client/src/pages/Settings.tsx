@@ -173,7 +173,11 @@ export default function Settings() {
                 <Button variant="default" size="sm">Connecter</Button>
               </div>
             </div>
-            <Button variant="outline" className="w-full mt-4">
+            <Button 
+              variant="outline" 
+              className="w-full mt-4"
+              onClick={() => window.location.href = '/platforms'}
+            >
               Voir toutes les connexions →
             </Button>
           </CardContent>
@@ -252,8 +256,37 @@ export default function Settings() {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-4">
+            <Button 
+              variant="outline" 
+              className="w-full mt-4"
+              onClick={() => window.location.href = '/agents'}
+            >
               Gérer l'équipe →
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Workflows */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <SettingsIcon className="h-5 w-5" />
+              Workflows Agents
+            </CardTitle>
+            <CardDescription>
+              Visualisez et gérez les workflows d'automatisation
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-4">
+              Accédez à la visualisation complète du pipeline d'agents et configurez les étapes de traitement.
+            </p>
+            <Button 
+              variant="outline" 
+              className="w-full"
+              onClick={() => window.location.href = '/workflows'}
+            >
+              Voir les workflows →
             </Button>
           </CardContent>
         </Card>

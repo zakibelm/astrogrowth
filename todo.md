@@ -304,3 +304,11 @@ Selon les maquettes fournies :
 - [x] Connexions Plateformes accessible depuis la page Paramètres
 - [x] Workflows accessible depuis la page Paramètres
 - [x] Décider si ces pages vont dans le bottom nav ou dans un menu hamburger/settings (choisi: Paramètres dans bottom nav)
+
+
+## 🔗 LIENS NAVIGATION PARAMÈTRES
+
+- [x] Ajouter des boutons/liens dans la page Paramètres vers Équipe d'Agents
+- [x] Ajouter des boutons/liens dans la page Paramètres vers Connexions Plateformes
+- [x] Ajouter des boutons/liens dans la page Paramètres vers Workflows
+- [x] Rendre ces pages accessibles depuis Paramètres
