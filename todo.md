@@ -95,3 +95,30 @@
 - [x] Créer un script de seed avec données de démonstration
 - [x] Workflow complet : créer campagne → générer leads → générer contenu → publier
 - [x] Vérifier que toutes les fonctionnalités sont réellement opérationnelles
+
+
+## 🔥 FONCTIONNALITÉS CONCRÈTES MANQUANTES
+
+### Formulaire & Workflow
+- [x] Formulaire création campagne qui déclenche VRAIMENT le scraping
+- [x] Bouton "Générer leads" qui appelle l'API Google Maps
+- [x] Affichage progression scraping en temps réel
+- [x] Notification quand scraping terminé
+
+### Liste de Leads Détaillée
+- [x] Page dédiée liste de leads par campagne
+- [x] Table avec TOUTES les colonnes : Nom, Adresse, Ville, Téléphone, Email, Site web, Rating, Score
+- [x] Filtres et tri sur la table
+- [x] Export CSV des leads
+- [x] Bouton "Générer contenu" pour chaque lead
+
+### Génération de Contenu Réelle
+- [x] Bouton "Générer contenu pour tous les leads" sur page campagne
+- [x] Appel API qui génère VRAIMENT texte + image pour chaque lead
+- [x] Affichage progression génération
+- [x] Preview du contenu généré avec image
+
+### Workflow Complet Utilisable
+- [x] Créer campagne → Scraper → Voir leads → Générer contenu → Approuver → Publier
+- [x] Chaque étape doit être FONCTIONNELLE et TESTABLE
+- [x] Données réelles à chaque étape (pas de placeholder)

@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import NewCampaign from "./pages/NewCampaign";
 import CampaignDetails from "./pages/CampaignDetails";
+import LeadsList from "./pages/LeadsList";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/campaigns/new"} component={NewCampaign} />
       <Route path={"/campaigns/:id"} component={CampaignDetails} />
+      <Route path={"/campaigns/:campaignId/leads"} component={LeadsList} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

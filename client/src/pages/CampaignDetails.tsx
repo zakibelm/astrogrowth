@@ -152,6 +152,16 @@ export default function CampaignDetails() {
               <p className="text-xs text-muted-foreground mt-1">
                 Prospects identifiés
               </p>
+              {(campaign.totalLeads || 0) > 0 && (
+                <Button
+                  variant="link"
+                  size="sm"
+                  className="mt-2 px-0 h-auto"
+                  onClick={() => setLocation(`/campaigns/${campaignId}/leads`)}
+                >
+                  Voir tous les leads →
+                </Button>
+              )}
             </CardContent>
           </Card>
 
