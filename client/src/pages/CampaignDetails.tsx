@@ -1,14 +1,17 @@
-import { useParams, useLocation } from "wouter";
+import { useLocation, useParams } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { ArrowLeft, Loader2, Users, FileText, Send, Play, Sparkles } from "lucide-react";
+import { useState } from "react";
+import LeadGenerationDialog from "@/components/LeadGenerationDialog";
 
 export default function CampaignDetails() {
   const params = useParams<{ id: string }>();
   const [, setLocation] = useLocation();
+  const [showLeadDialog, setShowLeadDialog] = useState(false);
   const campaignId = parseInt(params.id || "0");
 
   const { data: campaign, isLoading, refetch } = trpc.campaigns.get.useQuery({ id: campaignId });
@@ -59,6 +62,11 @@ export default function CampaignDetails() {
   }
 
   const handleStartCampaign = async () => {
+    // Show dialog and start generation
+    setShowLeadDialog(true);
+  };
+  
+  const handleLeadGenerationComplete = async () => {
     // Update status to running
     await updateStatus.mutateAsync({ id: campaignId, status: 'running' });
     
@@ -70,8 +78,8 @@ export default function CampaignDetails() {
       maxResults: 50,
     });
     
-    // Generate content for leads
-    await generateContent.mutateAsync({ campaignId });
+    // Refetch data
+    refetch();
   };
 
   const statusColors = {
@@ -363,6 +371,14 @@ export default function CampaignDetails() {
           </Card>
         )}
       </div>
+      
+      {/* Lead Generation Dialog */}
+      <LeadGenerationDialog
+        open={showLeadDialog}
+        onOpenChange={setShowLeadDialog}
+        campaignId={campaignId.toString()}
+        onComplete={handleLeadGenerationComplete}
+      />
     </div>
   );
 }

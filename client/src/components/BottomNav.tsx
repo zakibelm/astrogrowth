@@ -53,7 +53,7 @@ export default function BottomNav() {
           return (
             <button
               key={item.path}
-              onClick={() => window.location.href = item.path}
+              onClick={() => setLocation(item.path)}
               className={`flex flex-col items-center justify-center flex-1 h-full transition-colors ${
                 active
                   ? "text-primary"

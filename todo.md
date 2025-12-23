@@ -243,3 +243,55 @@ Selon les maquettes fournies :
 - [ ] Page de paramètres/configuration
 - [ ] Page de notifications
 - [x] Compléter le menu avec tous les onglets nécessaires (5 onglets maintenant)
+
+
+## 🚀 CORRECTIONS PRIORITAIRES
+
+- [x] Corriger la navigation par clic (utiliser setLocation correctement)
+- [x] Ajouter filtres de période sur Analytics (7/30/90 jours)
+- [x] Connecter workflow génération de leads avec barre de progression en temps réel
+
+## 📄 NOUVELLES PAGES CRITIQUES
+
+### Page Paramètres (Settings Hub)
+- [ ] Créer la page Settings avec sections : Profil, Connexions, Clés API, Équipe, Facturation
+- [ ] Section Profil Entreprise avec formulaire éditable
+- [ ] Section Connexions Plateformes avec statut (3/8 connectés)
+- [ ] Section Clés API avec OpenRouter et crédit restant
+- [ ] Section Équipe d'Agents (8 agents actifs)
+- [ ] Section Facturation avec plan et prochaine facture
+
+### Page Connexions Plateformes
+- [ ] Créer page avec 4 tabs : Réseaux Sociaux, Génération Média, Scraping, LLMs
+- [ ] Tab Réseaux Sociaux : LinkedIn (connecté), Instagram, Facebook
+- [ ] Tab Génération Média : Fal.ai, Imagen 3, DALL-E 3
+- [ ] Tab Scraping : PhantomBuster, Apify, Bright Data
+- [ ] Tab LLMs : OpenRouter avec multi-modèles
+- [ ] Afficher statut, utilisation, permissions pour chaque plateforme
+- [ ] Boutons Connecter/Déconnecter/Gérer pour chaque service
+
+### Page Équipe d'Agents
+- [ ] Créer page avec liste des 8 agents IA
+- [ ] Card pour chaque agent : Explorateur, Qualifier, Copywriter, Designer, Testeur, Distributeur, Analyste, Orchestrateur
+- [ ] Afficher rôle, modèle LLM, statut, métriques de performance
+- [ ] Boutons Configurer/Modifier/Désactiver pour chaque agent
+- [ ] Section statistiques globales de l'équipe
+
+### Page Workflows Agents
+- [ ] Créer page avec liste des workflows
+- [ ] Workflow "Lead to Publish" avec visualisation des 7 étapes
+- [ ] Workflow "Video Campaign" avec 5 étapes
+- [ ] Workflow "Nurturing Sequence" avec séquence email
+- [ ] Afficher statut, exécutions, temps moyen, taux de succès
+- [ ] Visualisation graphique du flow avec conditions et fallbacks
+- [ ] Bouton "Créer workflow personnalisé"
+
+## 🗄️ BACKEND ARCHITECTURE
+
+- [ ] Créer table platform_connections pour gérer les connexions
+- [ ] Créer table ai_agents pour l'équipe d'agents
+- [ ] Créer table agent_workflows pour les workflows
+- [ ] Créer table workflow_executions pour tracking
+- [ ] Créer service AgentOrchestrator en Python
+- [ ] Implémenter exécution de workflow avec logging
+- [ ] Ajouter fallbacks et retry logic

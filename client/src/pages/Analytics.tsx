@@ -1,12 +1,16 @@
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Users, FileText, Send } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
 /**
  * Page Analytics avec graphiques de performance
  * Affiche l'évolution des leads, contenus et engagement
  */
 export default function Analytics() {
+  const [period, setPeriod] = useState<7 | 30 | 90>(30);
+  
   // Données de démonstration pour les graphiques
   const leadsData = [
     { date: '1 Jan', leads: 5, contenus: 3, posts: 0 },
@@ -29,10 +33,37 @@ export default function Analytics() {
     <div className="min-h-screen bg-background pb-20">
       {/* Header */}
       <div className="bg-card border-b border-border p-6">
-        <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Performance de vos campagnes marketing
-        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Performance de vos campagnes marketing
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant={period === 7 ? "default" : "outline"}
+              size="sm"
+              onClick={() => setPeriod(7)}
+            >
+              7 jours
+            </Button>
+            <Button
+              variant={period === 30 ? "default" : "outline"}
+              size="sm"
+              onClick={() => setPeriod(30)}
+            >
+              30 jours
+            </Button>
+            <Button
+              variant={period === 90 ? "default" : "outline"}
+              size="sm"
+              onClick={() => setPeriod(90)}
+            >
+              90 jours
+            </Button>
+          </div>
+        </div>
       </div>
 
       <div className="p-6 space-y-6">
