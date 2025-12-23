@@ -312,3 +312,6 @@ Selon les maquettes fournies :
 - [x] Ajouter des boutons/liens dans la page Paramètres vers Connexions Plateformes
 - [x] Ajouter des boutons/liens dans la page Paramètres vers Workflows
 - [x] Rendre ces pages accessibles depuis Paramètres
+
+- [x] Ajouter onClick au bouton "Dashboard global" dans la page Équipe d'Agents pour naviguer vers /
+- [x] Vérifier tous les boutons similaires dans les autres pages (Connexions, Workflows)

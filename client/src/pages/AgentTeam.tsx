@@ -261,7 +261,7 @@ export default function AgentTeam() {
             <Settings className="h-4 w-4 mr-2" />
             Config avancée
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => setLocation("/")}>
             <BarChart3 className="h-4 w-4 mr-2" />
             Dashboard global
           </Button>
