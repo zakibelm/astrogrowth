@@ -186,3 +186,33 @@
 - [ ] Messages de progression
 - [ ] Animations de transition
 - [ ] États vides avec messages clairs
+
+
+## 🐛 CORRECTIONS BUGS
+
+- [x] Corriger l'erreur React dans Home.tsx (setLocation appelé pendant le rendu au lieu de useEffect)
+
+
+## 🚨 ÉLÉMENTS CRITIQUES MANQUANTS
+
+### Navigation
+- [x] Créer un bottom navigation bar pour mobile (visible dans les maquettes)
+- [x] Icônes de navigation : Dashboard, Campagnes, Contenus, Profil
+- [x] Navigation active avec highlight
+- [ ] Menu hamburger pour options supplémentaires
+
+### Pages à Reconstruire Exactement
+- [x] Dashboard : Layout exact avec cards, espacement, typographie des maquettes
+- [x] Liste de restaurants : Cards verticales avec images, layout exact
+- [x] Tableau Market 1 : Vue détaillée restaurant avec grande photo en haut
+- [x] Nouvelle campagne : Wizard avec indicateurs d'étapes visuels
+- [x] Approbation contenu : Grande image + texte + boutons colorés
+- [ ] Analytics : Graphiques et métriques selon maquettes
+- [x] Vue campagne : Layout exact avec sections bien définies
+
+### Design Exact
+- [ ] Respecter les espacements exacts des maquettes
+- [ ] Typographie : tailles de police exactes
+- [ ] Cards : arrondis, ombres, padding exacts
+- [ ] Boutons : style, taille, couleurs exacts
+- [ ] Images : ratios et positionnement exacts

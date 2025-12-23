@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getLoginUrl } from "@/const";
 import { useLocation } from "wouter";
+import { useEffect } from "react";
 import { Users, FileText, Send, TrendingUp, Plus, ArrowRight } from "lucide-react";
 
 /**
@@ -14,18 +15,19 @@ export default function Home() {
   const { user, loading, isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
 
+  // Rediriger vers le dashboard si connecté (useEffect doit être avant les returns conditionnels)
+  useEffect(() => {
+    if (!loading && isAuthenticated && user) {
+      setLocation("/dashboard");
+    }
+  }, [loading, isAuthenticated, user, setLocation]);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
-  }
-
-  if (isAuthenticated && user) {
-    // Rediriger vers le dashboard si connecté
-    setLocation("/dashboard");
-    return null;
   }
 
   return (

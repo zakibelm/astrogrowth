@@ -11,17 +11,42 @@ import CampaignDetails from "./pages/CampaignDetails";
 import LeadsList from "./pages/LeadsList";
 import LeadDetails from "./pages/LeadDetails";
 import ContentApproval from "./pages/ContentApproval";
+import Campaigns from "./pages/Campaigns";
+import Contents from "./pages/Contents";
+import Profile from "./pages/Profile";
+import AppLayout from "./components/AppLayout";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/dashboard"} component={Dashboard} />
-      <Route path={"/campaigns/new"} component={NewCampaign} />
-      <Route path={"/campaigns/:id"} component={CampaignDetails} />
-      <Route path={"/campaigns/:campaignId/leads"} component={LeadsList} />
-      <Route path={"/lead/:id"} component={LeadDetails} />
-      <Route path={"/content/:id"} component={ContentApproval} />
+      <Route path={"/dashboard"}>
+        <AppLayout><Dashboard /></AppLayout>
+      </Route>
+      <Route path={"/campaigns/new"}>
+        <AppLayout><NewCampaign /></AppLayout>
+      </Route>
+      <Route path={"/campaigns/:id"}>
+        <AppLayout><CampaignDetails /></AppLayout>
+      </Route>
+      <Route path={"/campaigns/:campaignId/leads"}>
+        <AppLayout><LeadsList /></AppLayout>
+      </Route>
+      <Route path={"/lead/:id"}>
+        <AppLayout><LeadDetails /></AppLayout>
+      </Route>
+      <Route path={"/content/:id"}>
+        <AppLayout><ContentApproval /></AppLayout>
+      </Route>
+      <Route path={"/campaigns"}>
+        <AppLayout><Campaigns /></AppLayout>
+      </Route>
+      <Route path={"/contents"}>
+        <AppLayout><Contents /></AppLayout>
+      </Route>
+      <Route path={"/profile"}>
+        <AppLayout><Profile /></AppLayout>
+      </Route>
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
