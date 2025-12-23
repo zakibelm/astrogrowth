@@ -15,6 +15,10 @@ import Campaigns from "./pages/Campaigns";
 import Contents from "./pages/Contents";
 import Profile from "./pages/Profile";
 import Analytics from "./pages/Analytics";
+import Settings from "./pages/Settings";
+import AgentTeam from "./pages/AgentTeam";
+import PlatformConnections from "./pages/PlatformConnections";
+import AgentWorkflows from "./pages/AgentWorkflows";
 import AppLayout from "./components/AppLayout";
 
 function Router() {
@@ -50,6 +54,18 @@ function Router() {
       </Route>
       <Route path={"/analytics"}>
         <AppLayout><Analytics /></AppLayout>
+      </Route>
+      <Route path={"/settings"}>
+        <AppLayout><Settings /></AppLayout>
+      </Route>
+      <Route path={"/agents"}>
+        <AppLayout><AgentTeam /></AppLayout>
+      </Route>
+      <Route path={"/platforms"}>
+        <AppLayout><PlatformConnections /></AppLayout>
+      </Route>
+      <Route path={"/workflows"}>
+        <AppLayout><AgentWorkflows /></AppLayout>
       </Route>
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
