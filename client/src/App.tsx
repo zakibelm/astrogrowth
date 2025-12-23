@@ -24,7 +24,9 @@ import AppLayout from "./components/AppLayout";
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"}>
+        <AppLayout><Dashboard /></AppLayout>
+      </Route>
       <Route path={"/dashboard"}>
         <AppLayout><Dashboard /></AppLayout>
       </Route>
