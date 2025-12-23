@@ -216,3 +216,11 @@
 - [ ] Cards : arrondis, ombres, padding exacts
 - [ ] Boutons : style, taille, couleurs exacts
 - [ ] Images : ratios et positionnement exacts
+
+
+## 🐛 CORRECTION MENU NAVIGATION
+
+- [x] Le bottom nav n'apparaît pas sur le dashboard - diagnostiquer le problème
+- [x] Vérifier que AppLayout est bien appliqué à toutes les pages
+- [x] Vérifier le z-index et le positionnement du bottom nav
+- [x] S'assurer que le menu est visible sur mobile et desktop
