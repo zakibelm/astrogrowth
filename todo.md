@@ -122,3 +122,67 @@
 - [x] Créer campagne → Scraper → Voir leads → Générer contenu → Approuver → Publier
 - [x] Chaque étape doit être FONCTIONNELLE et TESTABLE
 - [x] Données réelles à chaque étape (pas de placeholder)
+
+
+## 🎨 RECONSTRUCTION SELON MAQUETTES FRONTEND
+
+### Design System
+- [x] Mettre à jour les couleurs dans index.css (vert primaire #00D084)
+- [ ] Créer composants Card réutilisables avec variants
+- [ ] Créer composants Badge avec couleurs par statut
+- [ ] Définir spacing system cohérent
+
+### Dashboard Principal
+- [ ] Refaire Home.tsx avec layout exact des maquettes
+- [ ] 4 cartes métriques avec icônes et grandes valeurs
+- [ ] Section "Campagnes Actives" avec preview images
+- [ ] Design mobile-first avec espacement généreux
+
+### Formulaire Nouvelle Campagne
+- [ ] Wizard multi-étapes (1/3, 2/3, 3/3)
+- [ ] Étape 1 : Input nom de campagne
+- [ ] Étape 2 : Dropdown type d'entreprise
+- [ ] Étape 3 : Input localisation
+- [ ] Bouton vert "Créer la campagne"
+- [ ] Navigation entre étapes
+
+### Liste de Leads
+- [ ] Cards verticales avec photo restaurant
+- [ ] Nom, adresse, téléphone sur chaque card
+- [ ] Score coloré (vert/bleu/orange/rouge)
+- [ ] Note Google avec étoiles
+- [ ] Bouton d'action par lead
+
+### Détails Restaurant
+- [x] Page dédiée LeadDetails.tsx
+- [x] Grande image en haut
+- [x] Toutes infos contact (téléphone, email, site web)
+- [x] Score et note Google bien visibles
+- [x] Bouton "Générer du contenu" vert
+
+### Approbation de Contenu
+- [x] Page ContentApproval.tsx
+- [x] Grande preview image générée
+- [x] Texte marketing complet
+- [x] Score de qualité affiché
+- [x] Hashtags listés
+- [x] 3 boutons : Approuver (vert) / Rejeter (rouge) / Modifier
+
+### Analytics
+- [ ] Page Analytics.tsx avec graphiques
+- [ ] Intégration Chart.js ou Recharts
+- [ ] Graphiques de performance temporelle
+- [ ] Filtres par période
+
+### Détails Campagne
+- [ ] Refaire CampaignDetails.tsx selon maquette
+- [ ] En-tête avec nom et badge statut
+- [ ] 3 cartes métriques
+- [ ] Boutons d'action principaux
+- [ ] Listes leads et contenus avec preview
+
+### États et Transitions
+- [ ] Spinners de chargement élégants
+- [ ] Messages de progression
+- [ ] Animations de transition
+- [ ] États vides avec messages clairs

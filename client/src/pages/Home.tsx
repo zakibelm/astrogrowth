@@ -1,194 +1,125 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { getLoginUrl } from "@/const";
-import { ArrowRight, BarChart3, Sparkles, Target, Zap } from "lucide-react";
-import { Link } from "wouter";
+import { useLocation } from "wouter";
+import { Users, FileText, Send, TrendingUp, Plus, ArrowRight } from "lucide-react";
 
+/**
+ * Page d'accueil AstroGrowth - Landing page avec accès au dashboard
+ * Design selon les maquettes fournies
+ */
 export default function Home() {
-  const { isAuthenticated, loading } = useAuth();
+  const { user, loading, isAuthenticated } = useAuth();
+  const [, setLocation] = useLocation();
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
 
-  if (isAuthenticated) {
-    return (
-      <Link href="/dashboard">
-        <div className="min-h-screen flex items-center justify-center">
-          <Button size="lg">Accéder au Dashboard</Button>
-        </div>
-      </Link>
-    );
+  if (isAuthenticated && user) {
+    // Rediriger vers le dashboard si connecté
+    setLocation("/dashboard");
+    return null;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Hero Section */}
-      <div className="container py-20">
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-            <Sparkles className="h-4 w-4" />
-            Propulsé par l'Intelligence Artificielle
+      <div className="container py-12 md:py-24">
+        <div className="flex flex-col items-center text-center space-y-8">
+          {/* Logo / Titre */}
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight">
+              AstroGrowth
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
+              Automatisez votre marketing B2B avec l'intelligence artificielle
+            </p>
           </div>
-          
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Marketing Automatisé
-            <br />
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Pour Votre Croissance
-            </span>
-          </h1>
-          
-          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Générez des leads, créez du contenu marketing personnalisé et publiez automatiquement 
-            sur LinkedIn. Tout en pilote automatique.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={getLoginUrl()}>
-              <Button size="lg" className="gap-2 text-lg px-8 py-6">
-                Commencer Gratuitement
-                <ArrowRight className="h-5 w-5" />
-              </Button>
-            </a>
-            <Link href="/dashboard">
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                Voir une Démo
-              </Button>
-            </Link>
+
+          {/* Value Proposition */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full mt-12">
+            <Card className="border-2 hover:border-primary/50 transition-colors">
+              <CardHeader>
+                <Users className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Génération de Leads</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Identifiez automatiquement des prospects qualifiés via Google Maps
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-primary/50 transition-colors">
+              <CardHeader>
+                <FileText className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Contenu IA</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Générez du contenu marketing personnalisé avec Gemini et Imagen
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-primary/50 transition-colors">
+              <CardHeader>
+                <Send className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Publication Auto</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Publiez automatiquement sur LinkedIn avec rate limiting intelligent
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* CTA Button */}
+          <div className="mt-12">
+            <Button
+              size="lg"
+              className="text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all"
+              onClick={() => window.location.href = getLoginUrl()}
+            >
+              Accéder au Dashboard
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+
+          {/* Stats Preview */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 w-full max-w-3xl">
+            <div className="text-center p-4">
+              <div className="text-3xl font-bold text-primary">10x</div>
+              <div className="text-sm text-muted-foreground mt-1">Plus rapide</div>
+            </div>
+            <div className="text-center p-4">
+              <div className="text-3xl font-bold text-primary">80%</div>
+              <div className="text-sm text-muted-foreground mt-1">Moins cher</div>
+            </div>
+            <div className="text-center p-4">
+              <div className="text-3xl font-bold text-primary">50+</div>
+              <div className="text-sm text-muted-foreground mt-1">Clients</div>
+            </div>
+            <div className="text-center p-4">
+              <div className="text-3xl font-bold text-primary">24/7</div>
+              <div className="text-sm text-muted-foreground mt-1">Automatisé</div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
-          <Card className="border-2 hover:border-primary transition-all hover:shadow-xl">
-            <CardHeader>
-              <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <Target className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle>Génération de Leads</CardTitle>
-              <CardDescription>
-                Identifiez automatiquement des prospects qualifiés dans votre industrie et région
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary mt-2" />
-                  <span>Scraping Google Maps intelligent</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary mt-2" />
-                  <span>Enrichissement automatique des contacts</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary mt-2" />
-                  <span>Scoring de qualité 0-100</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 hover:border-primary transition-all hover:shadow-xl">
-            <CardHeader>
-              <div className="h-12 w-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                <Sparkles className="h-6 w-6 text-accent" />
-              </div>
-              <CardTitle>Contenu IA</CardTitle>
-              <CardDescription>
-                Créez du contenu marketing personnalisé avec Gemini 2.0 et Imagen 3
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-accent mt-2" />
-                  <span>Textes optimisés pour LinkedIn</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-accent mt-2" />
-                  <span>Images professionnelles générées</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-accent mt-2" />
-                  <span>Auto-approbation si score élevé</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 hover:border-primary transition-all hover:shadow-xl">
-            <CardHeader>
-              <div className="h-12 w-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-4">
-                <Zap className="h-6 w-6 text-green-600" />
-              </div>
-              <CardTitle>Publication Auto</CardTitle>
-              <CardDescription>
-                Publiez automatiquement sur LinkedIn avec rate limiting intelligent
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-green-600 mt-2" />
-                  <span>Connexion OAuth sécurisée</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-green-600 mt-2" />
-                  <span>Respect des limites API</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-green-600 mt-2" />
-                  <span>Tracking d'engagement</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* CTA Section */}
-        <Card className="max-w-4xl mx-auto bg-gradient-to-r from-primary to-accent text-primary-foreground border-0">
-          <CardHeader className="text-center pb-4">
-            <CardTitle className="text-3xl mb-2">
-              Prêt à Automatiser Votre Marketing ?
-            </CardTitle>
-            <CardDescription className="text-primary-foreground/80 text-lg">
-              Rejoignez les PME québécoises qui font croître leur business avec AstroGrowth
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col sm:flex-row gap-4 justify-center pb-8">
-            <a href={getLoginUrl()}>
-              <Button size="lg" variant="secondary" className="gap-2 text-lg px-8">
-                <BarChart3 className="h-5 w-5" />
-                Démarrer Maintenant
-              </Button>
-            </a>
-          </CardContent>
-        </Card>
-
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-20 text-center">
-          <div>
-            <div className="text-4xl font-bold text-primary mb-2">10x</div>
-            <div className="text-sm text-muted-foreground">Plus rapide qu'une agence</div>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-primary mb-2">80%</div>
-            <div className="text-sm text-muted-foreground">Moins cher</div>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-primary mb-2">100%</div>
-            <div className="text-sm text-muted-foreground">Automatisé</div>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-primary mb-2">24/7</div>
-            <div className="text-sm text-muted-foreground">Génération continue</div>
-          </div>
+      {/* Footer */}
+      <div className="border-t border-border mt-24">
+        <div className="container py-8 text-center text-sm text-muted-foreground">
+          <p>© 2024 AstroGrowth. Plateforme SaaS de marketing automatisé pour PME québécoises.</p>
         </div>
       </div>
     </div>

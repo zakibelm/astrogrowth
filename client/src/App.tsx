@@ -9,6 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import NewCampaign from "./pages/NewCampaign";
 import CampaignDetails from "./pages/CampaignDetails";
 import LeadsList from "./pages/LeadsList";
+import LeadDetails from "./pages/LeadDetails";
+import ContentApproval from "./pages/ContentApproval";
 
 function Router() {
   return (
@@ -18,6 +20,8 @@ function Router() {
       <Route path={"/campaigns/new"} component={NewCampaign} />
       <Route path={"/campaigns/:id"} component={CampaignDetails} />
       <Route path={"/campaigns/:campaignId/leads"} component={LeadsList} />
+      <Route path={"/lead/:id"} component={LeadDetails} />
+      <Route path={"/content/:id"} component={ContentApproval} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
