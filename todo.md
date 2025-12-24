@@ -441,3 +441,65 @@ Selon les maquettes fournies :
 - [x] Typographie plus grande pour les titres
 - [ ] Images de restaurants/plats plus présentes
 
+
+
+## 🔧 ARCHITECTURE COMPLÈTE V2 - ÉLÉMENTS MANQUANTS
+
+### Page Connexions Plateformes (PRIORITÉ HAUTE)
+- [x] Créer page avec 4 tabs : Réseaux Sociaux, Génération Média, Scraping, LLMs
+- [x] Tab Réseaux Sociaux : LinkedIn (connecté), Instagram, Facebook, Twitter
+- [x] Tab Génération Média : Fal.ai, Imagen 3, DALL-E 3, Stable Diffusion
+- [x] Tab Scraping : PhantomBuster, Apify, Bright Data, Google Maps API
+- [x] Tab LLMs : OpenRouter (multi-modèles), Hugging Face, Ollama
+- [x] Afficher statut connexion (connecté/déconnecté) avec badge coloré
+- [x] Afficher utilisation API (requêtes/mois, crédits restants)
+- [x] Boutons Connecter/Déconnecter/Configurer pour chaque service
+- [ ] Modal de configuration avec API keys et paramètres
+
+### LLM Router Multi-Tier (PRIORITÉ HAUTE)
+- [x] Créer service llmRouter.ts avec stratégie de fallback
+- [x] Tier 1 (Primary): OpenRouter avec sélection de modèles
+- [x] Liste modèles OpenRouter : Claude Sonnet 4, Gemini 2.0 Flash, Llama 3.3 70B, GPT-4
+- [x] Tier 2 (Fallback): Hugging Face Inference API (gratuit)
+- [x] Tier 3 (Emergency): Ollama (local, offline)
+- [x] Implémenter retry logic avec exponential backoff
+- [x] Logger tous les appels et erreurs
+- [x] Tracking des coûts par modèle et par requête
+
+### Gestion Crédits et Monitoring API
+- [x] Créer table api_usage dans la base de données
+- [x] Tracker requêtes par provider (OpenRouter, HuggingFace, Ollama)
+- [x] Calculer coûts en temps réel par modèle
+- [x] Afficher crédits restants dans l'interface
+- [x] Alertes quand crédits < 20%
+- [ ] Dashboard de monitoring avec graphiques d'utilisation
+- [ ] Export CSV des logs d'utilisation
+
+### Configuration OpenRouter
+- [x] Créer section dans Connexions Plateformes pour OpenRouter
+- [x] Dropdown sélection modèle primaire (Claude, Gemini, Llama, GPT-4)
+- [x] Afficher prix par 1M tokens pour chaque modèle
+- [x] Toggle fallback automatique vers modèles moins chers
+- [ ] Configuration rate limiting par modèle
+- [ ] Test de connexion avec bouton "Tester"
+
+### Backend Services
+- [x] Créer server/services/llmRouter.ts
+- [x] Créer server/services/apiMonitoring.ts
+- [ ] Créer server/services/platformConnections.ts
+- [ ] Ajouter routes tRPC pour gestion des connexions
+- [ ] Ajouter routes tRPC pour monitoring API
+- [ ] Implémenter encryption des API keys (crypto)
+
+### Base de Données
+- [x] Créer table platform_connections (provider, apiKey, status, config)
+- [x] Créer table api_usage (provider, model, tokens, cost, timestamp)
+- [x] Créer table llm_requests (requestId, provider, model, prompt, response, cost)
+- [x] Ajouter indexes pour performance
+
+### Interface Utilisateur
+- [ ] Badge "Crédits restants" dans le header
+- [ ] Notification toast quand changement de provider (fallback)
+- [ ] Page Analytics avec graphiques d'utilisation API
+- [ ] Indicateur de santé des providers (vert/orange/rouge)
+

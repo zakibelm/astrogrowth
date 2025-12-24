@@ -15,6 +15,13 @@
       "when": 1766501493352,
       "tag": "0001_sharp_hairball",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1766614714380,
+      "tag": "0002_hot_cardiac",
+      "breakpoints": true
     }
   ]
 }
