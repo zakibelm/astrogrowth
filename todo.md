@@ -528,3 +528,29 @@ Selon les maquettes fournies :
 - [ ] Route updateConfig() - Mettre à jour configuration d'une plateforme
 - [ ] Route testConnection() - Tester une connexion API
 
+
+
+## 🎨 CORRECTIONS ERGONOMIE + ANIMATIONS GSAP
+
+### Problèmes Ergonomie à Corriger
+- [x] Badge "Connecté" flotte au-dessus du titre - repositionner correctement
+- [x] Texte coupé "OpenR..." - afficher le nom complet "OpenRouter"
+- [x] Layout désorganisé - réorganiser avec flex/grid propre
+- [x] Informations mal alignées - aligner correctement tous les éléments
+- [x] Cards trop larges - optimiser la largeur et l'espacement
+
+### Animations GSAP
+- [x] Installer GSAP (pnpm add gsap)
+- [x] Ajouter animations d'entrée GSAP pour les cards (stagger, fade, scale)
+- [x] Ajouter animations hover GSAP sur les cards
+- [ ] Ajouter animations de transition entre tabs
+- [ ] Ajouter parallax subtil sur scroll
+
+### Dégradés et Effets Boutons
+- [x] Bouton "Configurer" avec dégradé bleu (from-blue-500 to-blue-700)
+- [x] Bouton "Déconnecter" avec dégradé rouge (from-red-500 to-red-700)
+- [x] Bouton "Connecter" avec dégradé vert (from-green-500 to-green-700)
+- [x] Hover effects avec scale et brightness
+- [ ] Animations de ripple sur click
+- [x] Ombres dynamiques sur hover
+

@@ -17,7 +17,7 @@ import Profile from "./pages/Profile";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import AgentTeam from "./pages/AgentTeam";
-import PlatformConnections from "./pages/PlatformConnectionsV2";
+import PlatformConnections from "./pages/PlatformConnectionsV2Fixed";
 import AgentWorkflows from "./pages/AgentWorkflows";
 import AppLayout from "./components/AppLayout";
 
@@ -64,6 +64,9 @@ function Router() {
         <AppLayout><AgentTeam /></AppLayout>
       </Route>
       <Route path={"/platforms"}>
+        <AppLayout><PlatformConnections /></AppLayout>
+      </Route>
+      <Route path={"/settings/connections"}>
         <AppLayout><PlatformConnections /></AppLayout>
       </Route>
       <Route path={"/workflows"}>
