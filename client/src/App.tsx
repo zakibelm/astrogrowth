@@ -5,7 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/DashboardV2";
 import NewCampaign from "./pages/NewCampaign";
 import CampaignDetails from "./pages/CampaignDetails";
 import LeadsList from "./pages/LeadsList";

@@ -405,3 +405,39 @@ Selon les maquettes fournies :
 - [ ] Réduire bundle size (code splitting)
 - [ ] Ajouter service worker pour cache
 
+
+
+## 🎨 DESIGN INSPIRÉ DES MAQUETTES ANCIENNES
+
+### Amélioration Dashboard
+- [x] Réorganiser le layout avec espacement plus généreux
+- [x] Améliorer les cards métriques avec icônes colorées et grandes valeurs
+- [ ] Ajouter section "Campagnes Actives" avec preview images de restaurants
+- [x] Améliorer le graphique avec design plus moderne
+- [ ] Ajouter section "Activité Récente" en bas
+
+### Amélioration Page Leads/Restaurants
+- [ ] Créer des cards verticales avec grande image en haut
+- [ ] Afficher nom, adresse, note Google, score sur chaque card
+- [ ] Layout en grille responsive (1 col mobile, 2-3 cols desktop)
+- [ ] Ajouter filtres en haut (score, localisation, industrie)
+
+### Amélioration Formulaire Nouvelle Campagne
+- [ ] Wizard visuel avec indicateurs d'étapes (1/3, 2/3, 3/3)
+- [ ] Design plus aéré avec un seul champ par étape
+- [ ] Boutons verts proéminents "Suivant" et "Créer la campagne"
+- [ ] Illustrations ou icônes pour chaque étape
+
+### Amélioration Approbation Contenu
+- [ ] Grande image en haut (full width)
+- [ ] Texte marketing bien lisible avec espacement
+- [ ] Score de qualité avec badge coloré
+- [ ] 3 boutons d'action bien visibles (Approuver vert, Rejeter rouge, Modifier bleu)
+
+### Amélioration Générale
+- [x] Augmenter l'espacement entre sections (plus de white space)
+- [x] Utiliser des cards avec ombres subtiles
+- [x] Boutons plus grands et plus visibles
+- [x] Typographie plus grande pour les titres
+- [ ] Images de restaurants/plats plus présentes
+
