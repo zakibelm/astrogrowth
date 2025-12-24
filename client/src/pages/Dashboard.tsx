@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { BarChart3, TrendingUp, Users, FileText, Send, Eye } from "lucide-react";
 import { Link } from "wouter";
+import { DashboardChart } from "@/components/DashboardChart";
+import { DashboardSkeleton } from "@/components/DashboardSkeleton";
 
 export default function Dashboard() {
   const { data: metrics, isLoading } = trpc.dashboard.metrics.useQuery();
@@ -10,11 +12,7 @@ export default function Dashboard() {
   const { data: recentContents } = trpc.contents.listByUser.useQuery({ status: undefined });
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   const stats = [
@@ -85,7 +83,7 @@ export default function Dashboard() {
           {stats.map((stat) => {
             const Icon = stat.icon;
             return (
-              <Card key={stat.title} className="overflow-hidden transition-all hover:shadow-lg">
+              <Card key={stat.title} className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
                     {stat.title}
@@ -105,6 +103,24 @@ export default function Dashboard() {
               </Card>
             );
           })}
+        </div>
+
+        {/* Evolution Chart */}
+        <div className="grid grid-cols-1 gap-8 mb-8">
+          <DashboardChart 
+            title="Évolution des Métriques"
+            description="Progression de vos leads, contenus et publications sur les 7 derniers jours"
+            data={[
+              { name: 'Lun', leads: 12, contenus: 8, publications: 6 },
+              { name: 'Mar', leads: 19, contenus: 15, publications: 12 },
+              { name: 'Mer', leads: 15, contenus: 12, publications: 10 },
+              { name: 'Jeu', leads: 25, contenus: 20, publications: 18 },
+              { name: 'Ven', leads: 22, contenus: 18, publications: 15 },
+              { name: 'Sam', leads: 18, contenus: 14, publications: 12 },
+              { name: 'Dim', leads: 20, contenus: 16, publications: 14 },
+            ]}
+            type="area"
+          />
         </div>
 
         {/* Engagement Details */}

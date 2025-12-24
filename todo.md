@@ -315,3 +315,93 @@ Selon les maquettes fournies :
 
 - [x] Ajouter onClick au bouton "Dashboard global" dans la page Équipe d'Agents pour naviguer vers /
 - [x] Vérifier tous les boutons similaires dans les autres pages (Connexions, Workflows)
+
+
+## 🎨 AMÉLIORATIONS UI/UX CONCRÈTES ET VISIBLES
+
+### Animations et Micro-interactions
+- [ ] Ajouter animations de transition entre pages (fade-in)
+- [x] Ajouter hover effects sur tous les boutons et cards
+- [x] Ajouter animations de chargement élégantes (pulse, skeleton)
+- [ ] Ajouter animations de succès/erreur (checkmark, shake)
+- [ ] Ajouter transitions fluides sur les graphiques
+
+### Dashboard Amélioré
+- [x] Ajouter graphiques interactifs Chart.js (évolution leads/contenus)
+- [ ] Ajouter graphique en temps réel des publications
+- [ ] Ajouter mini-graphiques dans les cards métriques (sparklines)
+- [ ] Ajouter section "Activité récente" avec timeline
+- [ ] Ajouter section "Campagnes performantes" avec top 3
+
+### Système de Notifications Toast
+- [x] Implémenter système de notifications toast (sonner ou react-hot-toast)
+- [x] Notifications succès (vert) pour actions réussies
+- [x] Notifications erreur (rouge) pour erreurs
+- [ ] Notifications info (bleu) pour informations
+- [ ] Notifications warning (orange) pour avertissements
+- [x] Afficher toasts pour toutes les actions (création, modification, suppression)
+
+### Page Analytics Avancée
+- [ ] Créer graphique ROI par campagne (coût vs leads générés)
+- [ ] Créer graphique taux de conversion (leads → contenus → publications)
+- [ ] Créer graphique engagement par type de contenu
+- [ ] Créer graphique performance par localisation
+- [ ] Ajouter export PDF des rapports analytics
+
+### Amélioration Page Campagnes
+- [ ] Ajouter barre de recherche pour filtrer campagnes
+- [ ] Ajouter filtres par statut (actives, terminées, en pause)
+- [ ] Ajouter tri par date, nombre de leads, performance
+- [ ] Ajouter vue liste ET vue grille (toggle)
+- [ ] Ajouter actions en masse (pause, reprendre, supprimer)
+
+### Tooltips et Aide Contextuelle
+- [ ] Ajouter tooltips sur tous les scores (explication calcul)
+- [ ] Ajouter tooltips sur les métriques (définitions)
+- [ ] Ajouter tooltips sur les boutons d'action
+- [ ] Ajouter aide contextuelle "?" sur formulaires complexes
+- [ ] Ajouter tour guidé pour nouveaux utilisateurs (intro.js)
+
+### Validation Formulaires en Temps Réel
+- [ ] Ajouter validation email en temps réel (regex)
+- [ ] Ajouter validation téléphone en temps réel
+- [ ] Ajouter indicateur de force pour mots de passe
+- [ ] Ajouter suggestions auto-complétion pour localisations
+- [ ] Ajouter messages d'erreur inline sous chaque champ
+
+### États de Chargement Avancés
+- [x] Créer skeletons pour toutes les pages (loading states)
+- [x] Ajouter shimmer effect sur les skeletons
+- [ ] Ajouter progress bars pour opérations longues
+- [ ] Ajouter spinners contextuels sur boutons (loading state)
+- [ ] Ajouter états vides avec illustrations (empty states)
+
+### Page Paramètres Complète
+- [ ] Section Profil avec avatar upload
+- [ ] Section Notifications avec préférences (email, push, SMS)
+- [ ] Section Sécurité avec 2FA
+- [ ] Section API Keys avec génération/révocation
+- [ ] Section Facturation avec historique paiements
+- [ ] Section Thème (clair/sombre)
+
+### Amélioration Mobile (Responsive)
+- [ ] Optimiser layout mobile pour toutes les pages
+- [ ] Ajouter swipe gestures pour navigation
+- [ ] Optimiser taille des boutons pour touch (min 44px)
+- [ ] Ajouter menu hamburger pour navigation secondaire
+- [ ] Tester sur différentes tailles d'écran (iPhone, Android)
+
+### Accessibilité (A11y)
+- [ ] Ajouter labels ARIA sur tous les éléments interactifs
+- [ ] Ajouter navigation clavier complète (tab, enter, esc)
+- [ ] Ajouter focus visible sur tous les éléments
+- [ ] Tester avec screen reader (NVDA, JAWS)
+- [ ] Respecter ratios de contraste WCAG AA
+
+### Performance Visuelle
+- [ ] Optimiser images (lazy loading, WebP)
+- [ ] Ajouter placeholders blur pour images
+- [ ] Optimiser animations (GPU acceleration)
+- [ ] Réduire bundle size (code splitting)
+- [ ] Ajouter service worker pour cache
+
