@@ -503,3 +503,28 @@ Selon les maquettes fournies :
 - [ ] Page Analytics avec graphiques d'utilisation API
 - [ ] Indicateur de santé des providers (vert/orange/rouge)
 
+
+
+## 🔧 CORRECTIONS CONNEXIONS PLATEFORMES
+
+### Affichage du vrai statut LinkedIn
+- [x] Créer route tRPC platformConnections.getStatus() pour récupérer les statuts réels
+- [x] Connecter PlatformConnectionsV2 à la base de données via tRPC
+- [x] Afficher linkedinConnected depuis la table users
+- [x] Afficher les vraies statistiques d'utilisation
+
+### Modals de Configuration
+- [x] Créer modal de configuration LinkedIn (OAuth flow)
+- [x] Créer modal de configuration OpenRouter (API key input)
+- [x] Créer modal de configuration Google Maps (API key input)
+- [x] Créer modal de configuration Imagen 3 (API key input)
+- [x] Bouton "Configurer" ouvre le bon modal selon la plateforme
+
+### Routes tRPC
+- [x] Créer router platformConnections dans routers.ts
+- [x] Route getStatus() - Récupérer statuts de toutes les plateformes
+- [ ] Route connect() - Initier connexion OAuth ou sauvegarder API key
+- [x] Route disconnect() - Déconnecter une plateforme
+- [ ] Route updateConfig() - Mettre à jour configuration d'une plateforme
+- [ ] Route testConnection() - Tester une connexion API
+

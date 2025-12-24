@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { trpc } from "@/lib/trpc";
+import ConfigModal from "@/components/ConfigModal";
 
 /**
  * Page Connexions Plateformes V2 - Architecture Complète
@@ -51,6 +53,17 @@ interface Platform {
 export default function PlatformConnectionsV2() {
   const [, setLocation] = useLocation();
   const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
+  
+  // Récupérer les vrais statuts depuis la base de données
+  const { data: platformStatus, isLoading } = trpc.platformConnections.getStatus.useQuery();
+  const disconnectMutation = trpc.platformConnections.disconnect.useMutation({
+    onSuccess: (data) => {
+      toast.success(data.message);
+    },
+    onError: () => {
+      toast.error('Erreur lors de la déconnexion');
+    }
+  });
 
   // Réseaux Sociaux
   const socialPlatforms: Platform[] = [
@@ -59,7 +72,7 @@ export default function PlatformConnectionsV2() {
       name: 'LinkedIn',
       description: 'Publication de posts marketing',
       icon: Linkedin,
-      status: 'connected',
+      status: platformStatus?.linkedin?.status === 'connected' ? 'connected' : 'disconnected',
       usage: '12/100 posts ce mois',
       credits: 'Illimité',
       color: 'text-blue-600'
@@ -206,14 +219,11 @@ export default function PlatformConnectionsV2() {
   };
 
   const handleDisconnect = (platformId: string) => {
-    toast.success(`Déconnexion de ${platformId} réussie`);
-    // TODO: Implémenter déconnexion
+    disconnectMutation.mutate({ platform: platformId });
   };
 
   const handleConfigure = (platformId: string) => {
     setSelectedPlatform(platformId);
-    toast.info(`Configuration de ${platformId}`);
-    // TODO: Ouvrir modal de configuration
   };
 
   const PlatformCard = ({ platform }: { platform: Platform }) => {
@@ -478,6 +488,13 @@ export default function PlatformConnectionsV2() {
           </TabsContent>
         </Tabs>
       </div>
+      
+      {/* Modal de configuration */}
+      <ConfigModal 
+        platform={selectedPlatform}
+        isOpen={selectedPlatform !== null}
+        onClose={() => setSelectedPlatform(null)}
+      />
     </div>
   );
 }

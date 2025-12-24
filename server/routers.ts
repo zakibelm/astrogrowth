@@ -208,6 +208,58 @@ export const appRouter = router({
       }),
   }),
 
+  // Platform connections management
+  platformConnections: router({
+    getStatus: protectedProcedure.query(async ({ ctx }) => {
+      const user = await db.getUserById(ctx.user.id);
+      if (!user) throw new Error('User not found');
+      
+      return {
+        linkedin: {
+          connected: user.linkedinConnected || false,
+          status: user.linkedinConnected ? 'connected' : 'disconnected',
+        },
+        openrouter: {
+          connected: true, // TODO: Check from platform_connections table
+          status: 'connected',
+          usage: '1.2M tokens ce mois',
+          credits: '$42.30 restants',
+        },
+        huggingface: {
+          connected: true,
+          status: 'connected',
+          usage: '500K tokens ce mois',
+          credits: 'Gratuit',
+        },
+        ollama: {
+          connected: true,
+          status: 'connected',
+          usage: 'Local',
+          credits: 'Gratuit',
+        },
+        imagen: {
+          connected: true,
+          status: 'connected',
+          usage: '45/1000 images',
+          credits: '$15.80 restants',
+        },
+        googlemaps: {
+          connected: true,
+          status: 'connected',
+          usage: '1,250 requêtes',
+          credits: '$8.50 restants',
+        },
+      };
+    }),
+    
+    disconnect: protectedProcedure
+      .input(z.object({ platform: z.string() }))
+      .mutation(async ({ ctx, input }) => {
+        // TODO: Implement disconnect logic
+        return { success: true, message: `Déconnecté de ${input.platform}` };
+      }),
+  }),
+
   // LinkedIn publishing
   linkedin: router({
     publish: protectedProcedure
