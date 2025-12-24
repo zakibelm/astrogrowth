@@ -16,7 +16,7 @@ import Contents from "./pages/Contents";
 import Profile from "./pages/Profile";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
-import AgentTeamCanvas from "./pages/AgentTeamCanvas";
+import AgentTeamComplete from "./pages/AgentTeamComplete";
 import PlatformConnections from "./pages/PlatformConnectionsV2Fixed";
 import AgentWorkflows from "./pages/AgentWorkflows";
 import AppLayout from "./components/AppLayout";
@@ -61,7 +61,7 @@ function Router() {
         <AppLayout><Settings /></AppLayout>
       </Route>
       <Route path={"/agents"}>
-        <AppLayout><AgentTeamCanvas /></AppLayout>
+        <AppLayout><AgentTeamComplete /></AppLayout>
       </Route>
       <Route path={"/platforms"}>
         <AppLayout><PlatformConnections /></AppLayout>
