@@ -3,6 +3,9 @@ import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, boolean,
 // Export des tables de monitoring API
 export * from "./schema-api-monitoring";
 
+// Export des tables agents
+export * from "./schema-agents";
+
 /**
  * Core user table backing auth flow.
  * Extended with business profile information for SME owners.

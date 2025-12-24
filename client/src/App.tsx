@@ -16,7 +16,7 @@ import Contents from "./pages/Contents";
 import Profile from "./pages/Profile";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
-import AgentTeam from "./pages/AgentTeam";
+import AgentTeam from "./pages/AgentTeamV2";
 import PlatformConnections from "./pages/PlatformConnectionsV2Fixed";
 import AgentWorkflows from "./pages/AgentWorkflows";
 import AppLayout from "./components/AppLayout";
