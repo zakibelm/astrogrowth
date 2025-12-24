@@ -221,51 +221,6 @@ export default function Settings() {
           </CardContent>
         </Card>
 
-        {/* Équipe d'Agents */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Users className="h-5 w-5" />
-              Équipe d'Agents IA
-            </CardTitle>
-            <CardDescription>
-              8 agents actifs • Performance globale : 94.2%
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {[
-                { name: "Explorateur", emoji: "🔍", status: "active" },
-                { name: "Qualifier", emoji: "🎯", status: "active" },
-                { name: "Copywriter", emoji: "✍️", status: "active" },
-                { name: "Designer", emoji: "🎨", status: "active" },
-                { name: "Testeur", emoji: "🧪", status: "active" },
-                { name: "Distributeur", emoji: "📱", status: "active" },
-                { name: "Analyste", emoji: "📊", status: "active" },
-                { name: "Orchestrateur", emoji: "🎭", status: "active" },
-              ].map((agent) => (
-                <div
-                  key={agent.name}
-                  className="flex flex-col items-center justify-center p-3 border rounded-lg bg-card"
-                >
-                  <span className="text-2xl mb-1">{agent.emoji}</span>
-                  <p className="text-xs font-medium text-foreground">{agent.name}</p>
-                  <Badge variant="outline" className="mt-1 bg-green-50 text-green-700 text-xs">
-                    Actif
-                  </Badge>
-                </div>
-              ))}
-            </div>
-            <Button 
-              variant="outline" 
-              className="w-full mt-4"
-              onClick={() => window.location.href = '/agents'}
-            >
-              Gérer l'équipe →
-            </Button>
-          </CardContent>
-        </Card>
-
         {/* Workflows */}
         <Card>
           <CardHeader>
