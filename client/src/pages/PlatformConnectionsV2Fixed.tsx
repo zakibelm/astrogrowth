@@ -215,17 +215,8 @@ export default function PlatformConnectionsV2Fixed() {
       usage: '500K tokens ce mois',
       credits: 'Gratuit',
       color: 'text-yellow-600'
-    },
-    {
-      id: 'ollama',
-      name: 'Ollama',
-      description: 'LLMs locaux (Emergency fallback)',
-      icon: Brain,
-      status: 'connected',
-      usage: 'Local (offline)',
-      credits: 'Gratuit',
-      color: 'text-green-600'
     }
+    // Ollama removed - OpenRouter + HuggingFace provide all needed models
   ];
 
   const handleConnect = (platformId: string) => {
@@ -481,9 +472,9 @@ export default function PlatformConnectionsV2Fixed() {
                     <Badge variant="default">Activé</Badge>
                   </div>
                   <div className="text-xs text-muted-foreground space-y-1 p-3 bg-muted/50 rounded-lg">
-                    <p>• <strong>Tier 1:</strong> OpenRouter (qualité premium)</p>
-                    <p>• <strong>Tier 2:</strong> Hugging Face (gratuit, si Tier 1 échoue)</p>
-                    <p>• <strong>Tier 3:</strong> Ollama (local, mode offline)</p>
+                    <p>• <strong>Tier 1:</strong> OpenRouter (qualité premium - Claude, Gemini, Llama, GPT-4)</p>
+                    <p>• <strong>Tier 2:</strong> Hugging Face (gratuit, fallback automatique)</p>
+                    <p className="text-sm text-muted-foreground mt-2">💡 OpenRouter donne accès à tous les modèles (même open-source), pas besoin d'Ollama local</p>
                   </div>
                 </div>
               </CardContent>

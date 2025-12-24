@@ -4,7 +4,8 @@
  * Architecture:
  * - Tier 1 (Primary): OpenRouter (Claude Sonnet 4, Gemini 2.0 Flash, Llama 3.3, GPT-4)
  * - Tier 2 (Fallback): Hugging Face Inference API (gratuit)
- * - Tier 3 (Emergency): Ollama (local, offline)
+ * 
+ * Note: Ollama removed - OpenRouter + HuggingFace already provide all needed models
  * 
  * Features:
  * - Retry logic avec exponential backoff
@@ -33,7 +34,7 @@ export interface LLMRequest {
 export interface LLMResponse {
   content: string;
   model: string;
-  provider: 'openrouter' | 'huggingface' | 'ollama';
+  provider: 'openrouter' | 'huggingface';
   tokens: {
     prompt: number;
     completion: number;
@@ -74,7 +75,7 @@ const OPENROUTER_MODELS = {
 // Configuration
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || '';
 const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY || '';
-const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
+// Ollama removed - not needed
 
 const MAX_RETRIES = 3;
 const INITIAL_RETRY_DELAY = 1000; // 1 seconde
@@ -213,54 +214,7 @@ async function callHuggingFace(request: LLMRequest): Promise<LLMResponse> {
   }
 }
 
-/**
- * Tier 3: Ollama (Emergency fallback local)
- */
-async function callOllama(request: LLMRequest): Promise<LLMResponse> {
-  const startTime = Date.now();
-
-  try {
-    console.log('[LLM Router] Tier 3: Emergency fallback to Ollama (local)');
-
-    const response = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'llama3.2',
-        messages: request.messages,
-        stream: false
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`Ollama error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const duration = Date.now() - startTime;
-
-    console.log(`[LLM Router] ✅ Ollama success (LOCAL), ${duration}ms`);
-
-    return {
-      content: data.message.content,
-      model: 'Llama 3.2 (Local)',
-      provider: 'ollama',
-      tokens: {
-        prompt: 0,
-        completion: 0,
-        total: 0
-      },
-      cost: 0, // Local = gratuit
-      duration
-    };
-
-  } catch (error) {
-    console.error('[LLM Router] ❌ Ollama error:', error);
-    throw error;
-  }
-}
+// Tier 3 (Ollama) removed - OpenRouter + HuggingFace provide all needed models
 
 /**
  * Router Principal avec Fallback Automatique
@@ -278,19 +232,12 @@ export async function invokeLLMWithRouter(request: LLMRequest): Promise<LLMRespo
       // Tier 2: Hugging Face (Fallback)
       return await callHuggingFace(request);
     } catch (error2) {
-      console.warn('[LLM Router] ⚠️ Tier 2 (Hugging Face) failed, trying Tier 3...');
-
-      try {
-        // Tier 3: Ollama (Emergency)
-        return await callOllama(request);
-      } catch (error3) {
-        // Tous les tiers ont échoué
-        console.error('[LLM Router] 💥 ALL TIERS FAILED');
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Tous les providers LLM sont indisponibles. Veuillez réessayer plus tard.'
-        });
-      }
+      // Tous les tiers ont échoué
+      console.error('[LLM Router] 💥 ALL TIERS FAILED (OpenRouter + HuggingFace)');
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Tous les providers LLM sont indisponibles. Veuillez réessayer plus tard.'
+      });
     }
   }
 }
