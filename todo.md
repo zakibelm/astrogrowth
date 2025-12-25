@@ -701,3 +701,36 @@ Selon les maquettes fournies :
 - [ ] Test agent en temps réel avant sauvegarde
 - [ ] Galerie agents personnalisés dans `/agents` avec badge "Custom"
 - [ ] Routes tRPC: `customAgents.create()`, `customAgents.list()`, `customAgents.test()`
+
+
+## 🔄 WORKFLOW BUILDER SÉQUENTIEL (DRAG & DROP)
+
+### Interface Drag & Drop
+- [x] Refaire WorkflowCreator.tsx avec layout 2 colonnes
+- [x] Colonne gauche: Liste des 48 agents disponibles (filtres département)
+- [x] Colonne droite: Zone canvas pour construire le workflow
+- [x] Drag & drop agents de gauche vers droite
+- [x] Réorganiser agents dans le canvas (changer ordre)
+- [x] Numérotation automatique des étapes (1, 2, 3...)
+- [x] Bouton "Retirer" pour supprimer agent du workflow
+
+### Visualisation Flow
+- [x] Afficher flèches entre agents (Agent 1 → Agent 2 → Agent 3)
+- [x] Highlight agent actif pendant drag
+- [x] Animation smooth lors du drop
+- [ ] Afficher output/input entre agents
+- [ ] Vue compacte vs vue détaillée (toggle)
+
+### Prompt Système Workflow
+- [x] Champ textarea "Mission du Workflow" (description globale)
+- [x] Champ "Nom du Workflow"
+- [x] Champ "Description courte"
+- [x] Validation: minimum 2 agents requis
+- [x] Calculateur prix automatique (somme agents)
+
+### Sauvegarde et Activation
+- [x] Bouton "Sauvegarder Workflow"
+- [x] Stocker ordre des agents (array avec positions)
+- [x] Stocker prompt système workflow
+- [ ] Permettre édition workflow après création
+- [ ] Permettre activation workflow personnalisé

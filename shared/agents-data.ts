@@ -1,10 +1,12 @@
 export interface AgentData {
+  id?: string;
   name: string;
   emoji: string;
   role: string;
   description: string;
   mission: string;
   model: string;
+  modelPrice?: string;
   department: string;
 }
 
