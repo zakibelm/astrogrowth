@@ -1,7 +1,7 @@
 import { eq, desc, and, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { 
-  InsertUser, users, 
+import {
+  InsertUser, users,
   campaigns, Campaign, InsertCampaign,
   leads, Lead, InsertLead,
   contents, Content, InsertContent,
@@ -91,6 +91,21 @@ export async function upsertUser(user: InsertUser): Promise<void> {
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) {
+    if (process.env.NODE_ENV === "development") {
+      console.log("[Database] Mocking user for dev mode (No DB)");
+      return {
+        id: 1,
+        openId,
+        name: "Dev User",
+        email: "dev@local.host",
+        loginMethod: "manus",
+        role: "admin",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastSignedIn: new Date(),
+        linkedinConnected: false
+      } as any;
+    }
     console.warn("[Database] Cannot get user: database not available");
     return undefined;
   }
@@ -116,16 +131,16 @@ export async function updateUserProfile(userId: number, profile: Partial<InsertU
 }
 
 export async function updateLinkedInTokens(
-  userId: number, 
-  accessToken: string, 
-  refreshToken: string, 
+  userId: number,
+  accessToken: string,
+  refreshToken: string,
   expiresIn: number
 ) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
   const expiry = new Date(Date.now() + expiresIn * 1000);
-  
+
   await db.update(users).set({
     linkedinAccessToken: accessToken,
     linkedinRefreshToken: refreshToken,
@@ -348,7 +363,7 @@ export async function incrementPostCount(userId: number) {
   if (!db) throw new Error("Database not available");
 
   const existing = await getRateLimit(userId);
-  
+
   if (!existing) {
     await db.insert(rateLimits).values({
       userId,
@@ -394,7 +409,7 @@ export async function getDashboardMetrics(userId: number) {
     .from(contents)
     .where(and(eq(contents.userId, userId), eq(contents.status, 'published')));
 
-  const [engagementResult] = await db.select({ 
+  const [engagementResult] = await db.select({
     totalLikes: sql<number>`sum(${contents.likes})`,
     totalComments: sql<number>`sum(${contents.comments})`,
     totalShares: sql<number>`sum(${contents.shares})`,

@@ -7,6 +7,7 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { registerDevAuthRoutes } from "./dev-auth";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -30,11 +31,36 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+
+  // Initialize Sentry
+  const { initSentry } = await import("../config/sentry");
+  initSentry(app);
+
+  // Initialize PubSub (if Redis is available)
+  const { initSubscriber } = await import("../services/pubsub");
+  const { isRedisAvailable } = await import("../config/redis");
+
+  try {
+    if (await isRedisAvailable()) {
+      await initSubscriber();
+      console.log("Redis Pub/Sub initialized");
+    } else {
+      console.warn("Redis not available - skipping Pub/Sub initialization. LLM features may be degraded.");
+    }
+  } catch (error) {
+    console.error("Failed to initialize PubSub:", error);
+  }
+
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+
+  // Dev Auth Bypass
+  if (process.env.NODE_ENV === "development") {
+    registerDevAuthRoutes(app);
+  }
   // tRPC API
   app.use(
     "/api/trpc",

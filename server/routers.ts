@@ -8,7 +8,7 @@ import * as dbAgents from "./db-agents";
 
 export const appRouter = router({
   system: systemRouter,
-  
+
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -25,7 +25,7 @@ export const appRouter = router({
     get: protectedProcedure.query(async ({ ctx }) => {
       return await db.getUserById(ctx.user.id);
     }),
-    
+
     update: protectedProcedure
       .input(z.object({
         businessName: z.string().optional(),
@@ -45,13 +45,13 @@ export const appRouter = router({
     list: protectedProcedure.query(async ({ ctx }) => {
       return await db.getCampaignsByUserId(ctx.user.id);
     }),
-    
+
     get: protectedProcedure
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
         return await db.getCampaignById(input.id);
       }),
-    
+
     create: protectedProcedure
       .input(z.object({
         name: z.string().min(1),
@@ -64,7 +64,7 @@ export const appRouter = router({
           ...input,
           status: 'draft',
         });
-        
+
         // Create notification
         await db.createNotification({
           userId: ctx.user.id,
@@ -73,10 +73,10 @@ export const appRouter = router({
           message: `La campagne "${input.name}" a été créée avec succès.`,
           campaignId,
         });
-        
+
         return { id: campaignId };
       }),
-    
+
     updateStatus: protectedProcedure
       .input(z.object({
         id: z.number(),
@@ -95,7 +95,7 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return await db.getLeadsByCampaignId(input.campaignId);
       }),
-    
+
     get: protectedProcedure
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
@@ -110,26 +110,26 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return await db.getContentsByCampaignId(input.campaignId);
       }),
-    
+
     listByUser: protectedProcedure
       .input(z.object({ status: z.string().optional() }))
       .query(async ({ ctx, input }) => {
         return await db.getContentsByUserId(ctx.user.id, input.status);
       }),
-    
+
     get: protectedProcedure
       .input(z.object({ id: z.number() }))
       .query(async ({ input }) => {
         return await db.getContentById(input.id);
       }),
-    
+
     approve: protectedProcedure
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
         await db.approveContent(input.id);
         return { success: true };
       }),
-    
+
     reject: protectedProcedure
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
@@ -145,7 +145,7 @@ export const appRouter = router({
       .query(async ({ ctx, input }) => {
         return await db.getNotificationsByUserId(ctx.user.id, input.unreadOnly);
       }),
-    
+
     markAsRead: protectedProcedure
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
@@ -214,7 +214,7 @@ export const appRouter = router({
     getStatus: protectedProcedure.query(async ({ ctx }) => {
       const user = await db.getUserById(ctx.user.id);
       if (!user) throw new Error('User not found');
-      
+
       return {
         linkedin: {
           connected: user.linkedinConnected || false,
@@ -252,7 +252,7 @@ export const appRouter = router({
         },
       };
     }),
-    
+
     disconnect: protectedProcedure
       .input(z.object({ platform: z.string() }))
       .mutation(async ({ ctx, input }) => {
@@ -262,10 +262,11 @@ export const appRouter = router({
   }),
 
   // AI Agents management
-  agents: router({    list: protectedProcedure.query(async ({ ctx }) => {
+  agents: router({
+    list: protectedProcedure.query(async ({ ctx }) => {
       return await dbAgents.getUserAgents(ctx.user.id);
     }),
-    
+
     toggle: protectedProcedure
       .input(z.object({
         agentId: z.string(),
@@ -274,7 +275,7 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await dbAgents.toggleUserAgent(ctx.user.id, input.agentId, input.enabled);
       }),
-    
+
     updateConfig: protectedProcedure
       .input(z.object({
         agentId: z.string(),
@@ -294,7 +295,7 @@ export const appRouter = router({
     list: publicProcedure.query(async () => {
       return await dbAgents.getAllWorkflows();
     }),
-    
+
     activate: protectedProcedure
       .input(z.object({
         workflowId: z.number(),
@@ -328,7 +329,7 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await dbAgents.activateWorkflow(ctx.user.id, input.workflowId, input.config);
       }),
-    
+
     deactivate: protectedProcedure
       .input(z.object({
         workflowId: z.number(),
@@ -336,7 +337,7 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await dbAgents.deactivateWorkflow(ctx.user.id, input.workflowId);
       }),
-    
+
     getUserWorkflows: protectedProcedure.query(async ({ ctx }) => {
       return await dbAgents.getUserWorkflows(ctx.user.id);
     }),
@@ -360,6 +361,78 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         const { batchPublish } = await import('./services/linkedinPublisher');
         return await batchPublish(input.contentIds, ctx.user.id);
+      }),
+  }),
+
+  // LLM Analytics & Management
+  llmAnalytics: router({
+    summary: protectedProcedure
+      .input(z.object({ days: z.number().optional().default(7) }))
+      .query(async ({ input }) => {
+        const { llmAnalytics } = await import('./services/llmAnalytics');
+        return await llmAnalytics.getAnalyticsSummary(input.days);
+      }),
+
+    forecast: protectedProcedure
+      .input(z.object({ horizonDays: z.number().optional().default(30) }))
+      .query(async ({ input }) => {
+        const { llmAnalytics } = await import('./services/llmAnalytics');
+        return await llmAnalytics.getForecast(input.horizonDays);
+      }),
+
+    cacheMetrics: protectedProcedure.query(async () => {
+      const { semanticCache } = await import('./services/semanticCache');
+      return await semanticCache.getMetrics();
+    }),
+
+    cacheInvalidate: protectedProcedure
+      .input(z.object({ pattern: z.string().optional() }))
+      .mutation(async ({ input }) => {
+        const { semanticCache } = await import('./services/semanticCache');
+        const count = await semanticCache.invalidate(input.pattern);
+        return { invalidated: count };
+      }),
+
+    circuitBreakerStatus: protectedProcedure.query(async () => {
+      const { circuitBreakerManager } = await import('./services/circuitBreaker');
+      return circuitBreakerManager.getAllStatus();
+    }),
+
+    circuitBreakerReset: protectedProcedure
+      .input(z.object({ provider: z.string().optional() }))
+      .mutation(async ({ input }) => {
+        const { circuitBreakerManager } = await import('./services/circuitBreaker');
+        if (input.provider) {
+          circuitBreakerManager.reset(input.provider);
+        } else {
+          circuitBreakerManager.resetAll();
+        }
+        return { success: true };
+      }),
+  }),
+
+  // LLM Router (for testing and admin)
+  llm: router({
+    complete: protectedProcedure
+      .input(z.object({
+        taskType: z.enum(['qualification', 'content_generation', 'verification', 'analysis', 'simple']),
+        messages: z.array(z.object({
+          role: z.enum(['system', 'user', 'assistant']),
+          content: z.string(),
+        })),
+        options: z.object({
+          temperature: z.number().optional(),
+          maxTokens: z.number().optional(),
+          bypassCache: z.boolean().optional(),
+        }).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { llmRouter } = await import('./services/llmRouter');
+        return await llmRouter.complete(
+          input.taskType as any,
+          input.messages as any,
+          input.options
+        );
       }),
   }),
 
