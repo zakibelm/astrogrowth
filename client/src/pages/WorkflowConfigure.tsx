@@ -21,17 +21,16 @@ export default function WorkflowConfigure() {
   // Form state
   const [businessInfo, setBusinessInfo] = useState({
     businessName: "",
-    country: "FR", // Default France
+    country: "US",
+    dialCode: "+1",
     address: "",
     city: "",
     province: "",
     postalCode: "",
-    dialCode: "+33", // Default France
     phone: "",
     website: "",
     sector: "",
     description: "",
-    currency: "EUR", // Default Euro
   });
 
   const [marketingGoals, setMarketingGoals] = useState({
@@ -192,8 +191,7 @@ export default function WorkflowConfigure() {
                       setBusinessInfo({ 
                         ...businessInfo, 
                         country: value,
-                        dialCode: country.dialCode,
-                        currency: country.currency
+                        dialCode: country.dialCode
                       });
                     }
                   }}
@@ -258,22 +256,15 @@ export default function WorkflowConfigure() {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="currency">Devise préférée</Label>
-                  <Select value={businessInfo.currency} onValueChange={(value) => setBusinessInfo({ ...businessInfo, currency: value })}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {CURRENCIES.map((curr) => (
-                        <SelectItem key={curr.code} value={curr.code}>
-                          {curr.symbol} {curr.code} - {curr.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="postalCode">Code postal</Label>
+                  <Input
+                    id="postalCode"
+                    placeholder="75001, 10001, etc."
+                    value={businessInfo.postalCode}
+                    onChange={(e) => setBusinessInfo({ ...businessInfo, postalCode: e.target.value })}
+                  />
                 </div>
               </div>
-
               <div>
                 <Label htmlFor="website">Site web</Label>
                 <Input

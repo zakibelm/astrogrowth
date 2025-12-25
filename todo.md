@@ -668,3 +668,12 @@ Selon les maquettes fournies :
 - [x] Adapter secteurs d'activité pour marché international (10 secteurs)
 - [ ] Workflows templates avec exemples multi-pays
 - [ ] Témoignages clients internationaux
+
+
+## 💵 SIMPLIFICATION DEVISE USD UNIQUEMENT
+
+- [x] Retirer sélecteur devise du formulaire WorkflowConfigure
+- [x] Simplifier useCurrency hook pour retourner toujours USD
+- [x] Mettre à jour affichage prix workflows (USD uniquement)
+- [x] Retirer champ currency de businessInfo
+- [x] Mettre à jour base de données (prix en USD)

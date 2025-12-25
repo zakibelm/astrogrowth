@@ -126,7 +126,7 @@ export default function Workflows() {
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-2xl font-bold text-primary">{formatPrice((workflow.monthlyPrice || 0) / 100)}</div>
-                        <div className="text-xs text-slate-500">{selectedCurrency}/mois</div>
+                        <div className="text-xs text-slate-500">USD/month</div>
                       </div>
                       <Button
                         size="sm"
