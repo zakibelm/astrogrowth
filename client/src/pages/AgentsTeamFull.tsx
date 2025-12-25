@@ -916,6 +916,15 @@ export default function AgentsTeamFull() {
               <Button
                 variant="outline"
                 size="sm"
+                onClick={() => navigate("/agents/create")}
+                className="gap-2"
+              >
+                <Bot className="h-4 w-4" />
+                Créer Agent Personnalisé
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={() => navigate("/workflows")}
                 className="gap-2"
               >

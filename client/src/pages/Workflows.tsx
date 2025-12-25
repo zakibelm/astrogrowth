@@ -74,9 +74,15 @@ export default function Workflows() {
                 </p>
               </div>
             </div>
-            <Badge variant="outline" className="text-sm">
-              {workflows.length} workflows disponibles
-            </Badge>
+            <div className="flex items-center gap-3">
+              <Button onClick={() => navigate("/workflows/create")} className="gap-2" size="sm">
+                <Sparkles className="h-4 w-4" />
+                Créer Workflow Personnalisé
+              </Button>
+              <Badge variant="outline" className="text-sm">
+                {workflows.length} workflows disponibles
+              </Badge>
+            </div>
           </div>
         </div>
       </div>

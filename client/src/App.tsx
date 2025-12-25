@@ -18,7 +18,9 @@ import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import AgentTeamComplete from "./pages/AgentTeamComplete";
 import AgentsTeamFull from "./pages/AgentsTeamFull";
-import Workflows from "./pages/Workflows";
+import Workflows from "@/pages/Workflows";
+import WorkflowCreator from "@/pages/WorkflowCreator";
+import AgentCreator from "@/pages/AgentCreator";
 import WorkflowConfigure from "./pages/WorkflowConfigure";
 import MyWorkflow from "./pages/MyWorkflow";
 import PlatformConnections from "./pages/PlatformConnectionsV2Fixed";
@@ -67,8 +69,14 @@ function Router() {
       <Route path={"/agents"}>
         <AppLayout><AgentsTeamFull /></AppLayout>
       </Route>
+      <Route path={"/agents/create"}>
+        <AppLayout><AgentCreator /></AppLayout>
+      </Route>
       <Route path={"/workflows"}>
         <AppLayout><Workflows /></AppLayout>
+      </Route>
+      <Route path={"/workflows/create"}>
+        <AppLayout><WorkflowCreator /></AppLayout>
       </Route>
       <Route path={"/workflows/:id/configure"}>
         <AppLayout><WorkflowConfigure /></AppLayout>

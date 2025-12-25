@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS custom_workflows (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  userId VARCHAR(255) NOT NULL,\n  name VARCHAR(255) NOT NULL,\n  description TEXT,\n  selectedAgents JSON NOT NULL,\n  executionOrder JSON,\n  monthlyPrice INT NOT NULL,\n  isActive BOOLEAN DEFAULT FALSE,\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  INDEX idx_user (userId)\n)",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2WGA22TR5N397xU.6ea51793960e --database 5a8cTZiVdVtergiPGoN2Fo --execute CREATE TABLE IF NOT EXISTS custom_workflows (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  userId VARCHAR(255) NOT NULL,\n  name VARCHAR(255) NOT NULL,\n  description TEXT,\n  selectedAgents JSON NOT NULL,\n  executionOrder JSON,\n  monthlyPrice INT NOT NULL,\n  isActive BOOLEAN DEFAULT FALSE,\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  INDEX idx_user (userId)\n)",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 190
+}

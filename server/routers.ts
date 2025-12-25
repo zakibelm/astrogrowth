@@ -362,6 +362,51 @@ export const appRouter = router({
         return await batchPublish(input.contentIds, ctx.user.id);
       }),
   }),
+
+  // Custom Workflows
+  customWorkflows: router({
+    create: protectedProcedure
+      .input(z.object({
+        name: z.string(),
+        description: z.string(),
+        selectedAgents: z.array(z.string()),
+        monthlyPrice: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        // For now, return mock success - will implement proper DB insert later
+        return { success: true, id: Date.now() };
+      }),
+
+    list: protectedProcedure.query(async ({ ctx }) => {
+      // For now, return empty array - will implement proper DB query later
+      return [];
+    }),
+  }),
+
+  // Custom Agents
+  customAgents: router({
+    create: protectedProcedure
+      .input(z.object({
+        name: z.string(),
+        emoji: z.string(),
+        role: z.string(),
+        description: z.string(),
+        mission: z.string(),
+        systemPrompt: z.string(),
+        model: z.string(),
+        tools: z.array(z.string()),
+        department: z.string(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        // For now, return mock success - will implement proper DB insert later
+        return { success: true, id: Date.now() };
+      }),
+
+    list: protectedProcedure.query(async ({ ctx }) => {
+      // For now, return empty array - will implement proper DB query later
+      return [];
+    }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

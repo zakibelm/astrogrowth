@@ -677,3 +677,27 @@ Selon les maquettes fournies :
 - [x] Mettre à jour affichage prix workflows (USD uniquement)
 - [x] Retirer champ currency de businessInfo
 - [x] Mettre à jour base de données (prix en USD)
+
+
+## 🎨 CRÉATEUR DE WORKFLOW PERSONNALISÉ
+
+- [ ] Créer table `custom_workflows` (user_id, name, description, selected_agents JSON)
+- [ ] Page `/workflows/create` avec interface de sélection agents
+- [ ] Afficher les 48 agents avec checkboxes pour sélection
+- [ ] Filtres par département (Direction, Prospection, Contenu, etc.)
+- [ ] Drag & drop pour définir ordre d'exécution
+- [ ] Calculateur prix automatique selon agents sélectionnés
+- [ ] Prévisualisation workflow avant sauvegarde
+- [ ] Routes tRPC: `customWorkflows.create()`, `customWorkflows.list()`
+
+## 🤖 CRÉATEUR D'AGENT IA PERSONNALISÉ
+
+- [ ] Créer table `custom_agents` (user_id, name, role, systemPrompt, model, tools JSON)
+- [ ] Page `/agents/create` avec formulaire création agent
+- [ ] Champs: Nom, Emoji, Rôle, Description, Mission
+- [ ] Éditeur prompt système avec syntaxe highlighting
+- [ ] Sélecteur modèle IA (GPT-4, Claude, Gemini, Llama)
+- [ ] Sélecteur outils disponibles (web_search, image_gen, etc.)
+- [ ] Test agent en temps réel avant sauvegarde
+- [ ] Galerie agents personnalisés dans `/agents` avec badge "Custom"
+- [ ] Routes tRPC: `customAgents.create()`, `customAgents.list()`, `customAgents.test()`
