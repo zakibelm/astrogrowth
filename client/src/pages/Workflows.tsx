@@ -15,8 +15,12 @@ export default function Workflows() {
   const [showDialog, setShowDialog] = useState(false);
   const { formatPrice, selectedCurrency } = useCurrency();
 
-  // Fetch workflows
+  // Fetch workflows (templates + custom)
   const { data: workflows = [], isLoading } = trpc.workflows.list.useQuery();
+  const { data: customWorkflows = [], isLoading: isLoadingCustom } = trpc.customWorkflows.list.useQuery();
+  
+  // Combine both lists
+  const allWorkflows = [...workflows, ...customWorkflows];
   const activateWorkflowMutation = trpc.workflows.activate.useMutation({
     onSuccess: () => {
       toast.success("Workflow activé avec succès !");
@@ -38,7 +42,7 @@ export default function Workflows() {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isLoadingCustom) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center">
         <div className="text-center">
@@ -80,7 +84,7 @@ export default function Workflows() {
                 Créer Workflow Personnalisé
               </Button>
               <Badge variant="outline" className="text-sm">
-                {workflows.length} workflows disponibles
+                {allWorkflows.length} workflows disponibles
               </Badge>
             </div>
           </div>
@@ -90,8 +94,9 @@ export default function Workflows() {
       {/* Workflows Grid */}
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {workflows.map((workflow) => {
-            const agentIds = workflow.agentIds as string[];
+          {allWorkflows.map((workflow) => {
+            const isCustom = workflow.isCustom || false;
+            const agentIds = isCustom ? (workflow.agents || []).map((a: any) => a.id) : (workflow.agentIds as string[]);
             const price = workflow.monthlyPrice ? (workflow.monthlyPrice / 100).toFixed(2) : "0.00";
             
             return (
@@ -104,10 +109,17 @@ export default function Workflows() {
                 
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
-                    <div className="text-4xl mb-2">{workflow.icon}</div>
-                    <Badge variant="secondary" className="text-xs">
-                      {agentIds.length} agents
-                    </Badge>
+                    <div className="text-4xl mb-2">{workflow.icon || "🎯"}</div>
+                    <div className="flex flex-col gap-1">
+                      {isCustom && (
+                        <Badge variant="default" className="text-xs">
+                          Personnalisé
+                        </Badge>
+                      )}
+                      <Badge variant="secondary" className="text-xs">
+                        {agentIds.length} agents
+                      </Badge>
+                    </div>
                   </div>
                   <CardTitle className="text-lg group-hover:text-primary transition-colors">
                     {workflow.name}

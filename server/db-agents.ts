@@ -213,3 +213,62 @@ export async function deactivateWorkflow(userId: number, workflowId: number) {
   
   return { success: true };
 }
+
+/**
+ * Custom Workflows - User-created workflows
+ */
+
+export async function createCustomWorkflow(
+  userId: number,
+  name: string,
+  description: string,
+  mission: string,
+  agents: Array<{ id: string; position: number }>,
+  totalPrice: number
+) {
+  // Use SQL directly via import to avoid Drizzle typing issues
+  const { sql } = await import('drizzle-orm');
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const agentsJson = JSON.stringify(agents);
+  const result = await db.execute(
+    sql`INSERT INTO custom_workflows (userId, name, description, mission, selectedAgents, monthlyPrice, createdAt, updatedAt)
+        VALUES (${userId}, ${name}, ${description}, ${mission}, ${agentsJson}, ${totalPrice}, NOW(), NOW())`
+  );
+  
+  return {
+    id: (result as any).insertId || Date.now(),
+    name,
+    description,
+    mission,
+    agents,
+    totalPrice,
+  };
+}
+
+export async function listCustomWorkflows(userId: number) {
+  const { sql } = await import('drizzle-orm');
+  const db = await getDb();
+  if (!db) return [];
+  
+  const rows = await db.execute(
+    sql`SELECT id, name, description, mission, selectedAgents, monthlyPrice, createdAt, updatedAt
+        FROM custom_workflows
+        WHERE userId = ${userId}
+        ORDER BY createdAt DESC`
+  );
+  
+  const results = (rows as any).rows || (rows as any) || [];
+  return results.map((row: any) => ({
+    id: row.id,
+    name: row.name,
+    description: row.description,
+    mission: row.mission,
+    agents: JSON.parse(row.selectedAgents || '[]'),
+    monthlyPrice: row.monthlyPrice,
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
+    isCustom: true,
+  }));
+}

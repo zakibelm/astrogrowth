@@ -197,8 +197,9 @@ export default function WorkflowCreator() {
     createWorkflowMutation.mutate({
       name: workflowName,
       description: workflowDescription,
-      selectedAgents: workflowAgents.map((wa) => wa.id),
-      monthlyPrice: Math.round(calculateTotalPrice() * 100), // Convert to cents
+      mission: workflowMission,
+      agents: workflowAgents.map((wa, index) => ({ id: wa.id, position: index })),
+      totalPrice: Math.round(calculateTotalPrice()),
     });
   };
 

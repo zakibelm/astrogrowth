@@ -764,3 +764,35 @@ Selon les maquettes fournies :
 - [x] Badge "Rôle: Lead Generation" sous l'agent
 - [ ] Highlight connexions entre agents (output → input)
 - [ ] Suggestions d'ordre optimal selon bonnes pratiques
+
+
+## 🎯 SYSTÈME COMPLET ORCHESTRATION WORKFLOWS
+
+### Phase 1: Persistance DB Workflows Personnalisés
+- [x] Implémenter createCustomWorkflow() dans server/db-agents.ts
+- [x] Sauvegarder: nom, description, mission, agents (JSON array avec ordre), prix
+- [x] Implémenter listCustomWorkflows(userId) pour récupérer workflows créés
+- [x] Remplacer routes tRPC mock par vraies fonctions DB
+
+### Phase 2: Galerie Workflows Personnalisés
+- [x] Afficher workflows personnalisés dans /workflows avec badge "Personnalisé"
+- [x] Bouton "Activer" qui redirige vers /workflows/:id/configure
+- [ ] Permettre édition workflow personnalisé (/workflows/:id/edit)
+- [ ] Permettre suppression workflow personnalisé
+
+### Phase 3: Orchestrateur Backend
+- [ ] Créer server/orchestrator.ts avec classe WorkflowOrchestrator
+- [ ] Méthode executeWorkflow(workflowId, userId, config)
+- [ ] Lecture mission système + agents + ordre depuis DB
+- [ ] Exécution séquentielle: Agent 1 → validation → Agent 2 → validation → Agent 3
+- [ ] Appel LLM pour chaque agent avec prompt personnalisé
+- [ ] Validation output entre étapes (orchestrateur vérifie qualité)
+- [ ] Gestion erreurs et retry (max 3 tentatives)
+
+### Phase 4: Logs et Monitoring
+- [ ] Table workflow_executions (workflowId, userId, status, startedAt, completedAt)
+- [ ] Table workflow_execution_logs (executionId, agentId, step, status, output, error)
+- [ ] Route tRPC executions.getStatus(executionId)
+- [ ] Route tRPC executions.getLogs(executionId)
+- [ ] Page /executions/:id avec timeline d'exécution en temps réel
+- [ ] WebSocket pour updates live pendant exécution

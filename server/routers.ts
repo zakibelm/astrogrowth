@@ -369,17 +369,29 @@ export const appRouter = router({
       .input(z.object({
         name: z.string(),
         description: z.string(),
-        selectedAgents: z.array(z.string()),
-        monthlyPrice: z.number(),
+        mission: z.string(),
+        agents: z.array(z.object({
+          id: z.string(),
+          position: z.number(),
+        })),
+        totalPrice: z.number(),
       }))
       .mutation(async ({ ctx, input }) => {
-        // For now, return mock success - will implement proper DB insert later
-        return { success: true, id: Date.now() };
+        const { createCustomWorkflow } = await import("./db-agents");
+        const result = await createCustomWorkflow(
+          ctx.user.id,
+          input.name,
+          input.description,
+          input.mission,
+          input.agents,
+          input.totalPrice
+        );
+        return { success: true, id: result.id };
       }),
 
     list: protectedProcedure.query(async ({ ctx }) => {
-      // For now, return empty array - will implement proper DB query later
-      return [];
+      const { listCustomWorkflows } = await import("./db-agents");
+      return await listCustomWorkflows(ctx.user.id);
     }),
   }),
 
