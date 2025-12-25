@@ -929,32 +929,32 @@ export default function AgentsTeamFull() {
       {/* Tabs par catégorie */}
       <div className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-3 md:grid-cols-9 gap-2 h-auto bg-transparent">
-            <TabsTrigger value="all" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white">
+          <TabsList className="flex flex-wrap gap-2 h-auto bg-transparent p-2">
+            <TabsTrigger value="all" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Tous ({categoryCounts.all})
             </TabsTrigger>
-            <TabsTrigger value="direction" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-indigo-600 data-[state=active]:text-white">
+            <TabsTrigger value="direction" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-indigo-600 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Direction ({categoryCounts.direction})
             </TabsTrigger>
-            <TabsTrigger value="prospection" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white">
+            <TabsTrigger value="prospection" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Prospection ({categoryCounts.prospection})
             </TabsTrigger>
-            <TabsTrigger value="contenu" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white">
+            <TabsTrigger value="contenu" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Contenu ({categoryCounts.contenu})
             </TabsTrigger>
-            <TabsTrigger value="community" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-pink-600 data-[state=active]:text-white">
+            <TabsTrigger value="community" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-pink-600 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Community ({categoryCounts.community})
             </TabsTrigger>
-            <TabsTrigger value="ads" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-indigo-600 data-[state=active]:text-white">
+            <TabsTrigger value="ads" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-indigo-600 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Publicité ({categoryCounts.ads})
             </TabsTrigger>
-            <TabsTrigger value="analytics" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white">
+            <TabsTrigger value="analytics" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Analytics ({categoryCounts.analytics})
             </TabsTrigger>
-            <TabsTrigger value="ops" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-indigo-600 data-[state=active]:text-white">
+            <TabsTrigger value="ops" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-indigo-600 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Ops ({categoryCounts.ops})
             </TabsTrigger>
-            <TabsTrigger value="success" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-600 data-[state=active]:to-emerald-600 data-[state=active]:text-white">
+            <TabsTrigger value="success" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-600 data-[state=active]:to-emerald-600 data-[state=active]:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all">
               Success ({categoryCounts.success})
             </TabsTrigger>
           </TabsList>
