@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import AgentTeamComplete from "./pages/AgentTeamComplete";
+import AgentsTeamFull from "./pages/AgentsTeamFull";
 import PlatformConnections from "./pages/PlatformConnectionsV2Fixed";
 import AgentWorkflows from "./pages/AgentWorkflows";
 import AppLayout from "./components/AppLayout";
@@ -61,7 +62,7 @@ function Router() {
         <AppLayout><Settings /></AppLayout>
       </Route>
       <Route path={"/agents"}>
-        <AppLayout><AgentTeamComplete /></AppLayout>
+        <AppLayout><AgentsTeamFull /></AppLayout>
       </Route>
       <Route path={"/platforms"}>
         <AppLayout><PlatformConnections /></AppLayout>
