@@ -15,7 +15,7 @@ export default function WorkflowConfigure() {
   const { id } = useParams<{ id: string }>();
   const [, navigate] = useLocation();
   const [step, setStep] = useState(1);
-  const totalSteps = 4;
+  const totalSteps = 5;
 
   // Form state
   const [businessInfo, setBusinessInfo] = useState({
@@ -43,6 +43,13 @@ export default function WorkflowConfigure() {
     postingFrequency: "daily",
     responseTime: "1h",
     customInstructions: "",
+  });
+
+  const [workflowMission, setWorkflowMission] = useState({
+    objective: "",
+    kpis: "",
+    timeline: "",
+    constraints: "",
   });
 
   // Fetch workflow details
@@ -80,6 +87,7 @@ export default function WorkflowConfigure() {
       businessInfo,
       marketingGoals,
       agentPreferences,
+      workflowMission,
     };
 
     // Activate workflow with configuration
@@ -339,8 +347,81 @@ export default function WorkflowConfigure() {
           </Card>
         )}
 
-        {/* Step 3: Agent Preferences */}
+        {/* Step 3: Workflow Mission */}
         {step === 3 && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-6 w-6 text-primary" />
+                Mission du Workflow
+              </CardTitle>
+              <CardDescription>
+                Définissez l'objectif stratégique global que tous les agents devront accomplir ensemble
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="objective">Objectif stratégique principal *</Label>
+                <Textarea
+                  id="objective"
+                  placeholder="Ex: Générer 50 leads qualifiés par mois pour notre restaurant italien à Montréal via Instagram et Google Maps, en ciblant les familles et professionnels 30-55 ans"
+                  rows={4}
+                  value={workflowMission.objective}
+                  onChange={(e) => setWorkflowMission({ ...workflowMission, objective: e.target.value })}
+                  className="text-base"
+                />
+                <p className="text-sm text-slate-500 mt-2">
+                  Soyez précis : incluez le nombre, le type de résultat, la cible et les canaux
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="kpis">KPIs et métriques de succès *</Label>
+                <Textarea
+                  id="kpis"
+                  placeholder="Ex: 50 leads/mois, taux conversion 15%, coût par lead < 20$, 1000 nouveaux followers Instagram, note Google 4.5+"
+                  rows={3}
+                  value={workflowMission.kpis}
+                  onChange={(e) => setWorkflowMission({ ...workflowMission, kpis: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="timeline">Délai et étapes clés</Label>
+                <Textarea
+                  id="timeline"
+                  placeholder="Ex: Mois 1-2: Setup et premiers contenus, Mois 3-4: Optimisation et scaling, Mois 5-6: Atteinte objectifs"
+                  rows={3}
+                  value={workflowMission.timeline}
+                  onChange={(e) => setWorkflowMission({ ...workflowMission, timeline: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="constraints">Contraintes et priorités</Label>
+                <Textarea
+                  id="constraints"
+                  placeholder="Ex: Budget limité, éviter contenu trop promotionnel, privilégier authenticité, respecter identité visuelle existante"
+                  rows={3}
+                  value={workflowMission.constraints}
+                  onChange={(e) => setWorkflowMission({ ...workflowMission, constraints: e.target.value })}
+                />
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                <p className="text-sm text-blue-900 font-medium mb-2">
+                  💡 Pourquoi c'est important ?
+                </p>
+                <p className="text-sm text-blue-800">
+                  Cette mission sera injectée dans le prompt de TOUS vos agents. Chaque agent comprendra son rôle dans la mission globale et travaillera en cohérence avec les autres pour atteindre votre objectif.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Step 4: Agent Preferences */}
+        {step === 4 && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -412,8 +493,8 @@ export default function WorkflowConfigure() {
           </Card>
         )}
 
-        {/* Step 4: Review & Confirm */}
-        {step === 4 && (
+        {/* Step 5: Review & Confirm */}
+        {step === 5 && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -449,6 +530,24 @@ export default function WorkflowConfigure() {
                   <div><span className="text-slate-600">Objectif:</span> <span className="font-medium">{marketingGoals.primaryGoal}</span></div>
                   <div><span className="text-slate-600">Leads/mois:</span> <span className="font-medium">{marketingGoals.leadsPerMonth || "Non spécifié"}</span></div>
                   <div><span className="text-slate-600">Budget:</span> <span className="font-medium">{marketingGoals.budget || "Non spécifié"}</span></div>
+                </div>
+              </div>
+
+              {/* Workflow Mission Summary */}
+              <div className="p-4 bg-amber-50 rounded-lg border-2 border-amber-200">
+                <h3 className="font-semibold mb-3 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-amber-600" />
+                  Mission du Workflow
+                </h3>
+                <div className="space-y-2 text-sm">
+                  <div>
+                    <span className="text-slate-600 font-medium">Objectif:</span>
+                    <p className="text-slate-800 mt-1">{workflowMission.objective || "Non spécifié"}</p>
+                  </div>
+                  <div>
+                    <span className="text-slate-600 font-medium">KPIs:</span>
+                    <p className="text-slate-800 mt-1">{workflowMission.kpis || "Non spécifié"}</p>
+                  </div>
                 </div>
               </div>
 

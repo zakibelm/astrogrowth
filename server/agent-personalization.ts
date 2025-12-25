@@ -32,10 +32,18 @@ interface AgentPreferences {
   customInstructions: string;
 }
 
+interface WorkflowMission {
+  objective: string;
+  kpis: string;
+  timeline: string;
+  constraints: string;
+}
+
 interface WorkflowConfig {
   businessInfo?: BusinessInfo;
   marketingGoals?: MarketingGoals;
   agentPreferences?: AgentPreferences;
+  workflowMission?: WorkflowMission;
 }
 
 /**
@@ -45,7 +53,25 @@ export function personalizeAgentPrompt(
   basePrompt: string,
   config: WorkflowConfig
 ): string {
-  let personalizedPrompt = basePrompt;
+  let contextPrefix = "";
+
+  // Inject workflow mission FIRST (highest priority)
+  if (config.workflowMission && config.workflowMission.objective) {
+    const { objective, kpis, timeline, constraints } = config.workflowMission;
+    
+    const missionContext = `
+
+## 🎯 MISSION WORKFLOW (PRIORITÉ ABSOLUE)
+**Objectif stratégique global:** ${objective}
+
+**KPIs et métriques de succès:** ${kpis}
+${timeline ? `\n**Délai et étapes:** ${timeline}` : ""}
+${constraints ? `\n**Contraintes:** ${constraints}` : ""}
+
+⚠️ **Ton rôle dans cette mission:** Chaque action que tu entreprends doit contribuer directement à l'atteinte de cet objectif global. Travaille en cohérence avec les autres agents pour maximiser l'impact collectif.
+`;
+    contextPrefix += missionContext;
+  }
 
   // Inject business context
   if (config.businessInfo) {
@@ -59,7 +85,7 @@ Tu travailles pour **${businessName}**, une entreprise dans le secteur **${secto
 ${website ? `- Site web: ${website}` : ""}
 ${description ? `- Description: ${description}` : ""}
 `;
-    personalizedPrompt += businessContext;
+    contextPrefix += businessContext;
   }
 
   // Inject marketing goals
@@ -74,7 +100,7 @@ ${leadsPerMonth ? `- Cible: ${leadsPerMonth} leads par mois` : ""}
 ${targetAudience ? `- Audience cible: ${targetAudience}` : ""}
 ${uniqueSellingPoint ? `- Proposition de valeur unique: ${uniqueSellingPoint}` : ""}
 `;
-    personalizedPrompt += goalsContext;
+    contextPrefix += goalsContext;
   }
 
   // Inject agent preferences
@@ -89,10 +115,11 @@ ${uniqueSellingPoint ? `- Proposition de valeur unique: ${uniqueSellingPoint}` :
 - Temps de réponse souhaité: ${responseTime}
 ${customInstructions ? `- Instructions personnalisées: ${customInstructions}` : ""}
 `;
-    personalizedPrompt += preferencesContext;
+    contextPrefix += preferencesContext;
   }
 
-  return personalizedPrompt;
+  // Return context + base prompt
+  return contextPrefix + basePrompt;
 }
 
 /**

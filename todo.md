@@ -619,3 +619,20 @@ Selon les maquettes fournies :
 - [ ] Configurer paramètres vidéo (résolution, durée, format)
 - [ ] Gestion file d'attente génération vidéo
 - [ ] Stockage vidéos générées sur S3
+
+
+## 🎯 MISSION WORKFLOW GLOBALE
+
+### Prompt Mission Stratégique
+- [x] Ajouter champ "Mission Workflow" dans questionnaire configuration
+- [x] Question: "Décrivez l'objectif stratégique principal de ce workflow (ex: Générer 50 leads/mois, Augmenter notoriété locale, Lancer nouveau produit)"
+- [x] Champ textarea pour description détaillée de la mission
+- [x] Ajouter KPIs cibles spécifiques (nombre, délai, budget)
+- [x] Stocker dans workflowConfig.workflowMission
+
+### Injection Mission dans Prompts Agents
+- [x] Modifier agent-personalization.ts pour ajouter section MISSION WORKFLOW
+- [x] Injecter la mission au début de chaque prompt agent
+- [x] Format: "MISSION WORKFLOW: {workflowMission} - Ton rôle dans cette mission: {agent-specific-role}"
+- [x] Assurer cohérence entre tous les agents du même workflow
+- [x] Permettre aux agents de référencer la mission dans leurs décisions
