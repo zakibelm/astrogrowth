@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import * as db from "./db";
+import * as dbAgents from "./db-agents";
 
 export const appRouter = router({
   system: systemRouter,
@@ -258,6 +259,61 @@ export const appRouter = router({
         // TODO: Implement disconnect logic
         return { success: true, message: `Déconnecté de ${input.platform}` };
       }),
+  }),
+
+  // AI Agents management
+  agents: router({    list: protectedProcedure.query(async ({ ctx }) => {
+      return await dbAgents.getUserAgents(ctx.user.id);
+    }),
+    
+    toggle: protectedProcedure
+      .input(z.object({
+        agentId: z.string(),
+        enabled: z.boolean(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        return await dbAgents.toggleUserAgent(ctx.user.id, input.agentId, input.enabled);
+      }),
+    
+    updateConfig: protectedProcedure
+      .input(z.object({
+        agentId: z.string(),
+        llmModel: z.string().optional(),
+        systemPrompt: z.string().optional(),
+        ragDocuments: z.array(z.string()).optional(),
+        config: z.record(z.string(), z.any()).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const { agentId, ...config } = input;
+        return await dbAgents.updateUserAgentConfig(ctx.user.id, agentId, config);
+      }),
+  }),
+
+  // Workflows management
+  workflows: router({
+    list: publicProcedure.query(async () => {
+      return await dbAgents.getAllWorkflows();
+    }),
+    
+    activate: protectedProcedure
+      .input(z.object({
+        workflowId: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        return await dbAgents.activateWorkflow(ctx.user.id, input.workflowId);
+      }),
+    
+    deactivate: protectedProcedure
+      .input(z.object({
+        workflowId: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        return await dbAgents.deactivateWorkflow(ctx.user.id, input.workflowId);
+      }),
+    
+    getUserWorkflows: protectedProcedure.query(async ({ ctx }) => {
+      return await dbAgents.getUserWorkflows(ctx.user.id);
+    }),
   }),
 
   // LinkedIn publishing

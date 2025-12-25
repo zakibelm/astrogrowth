@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `user_workflows` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `userId` int NOT NULL,\n  `workflowId` int NOT NULL,\n  `active` boolean NOT NULL DEFAULT true,\n  `activatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `deactivatedAt` timestamp,\n  CONSTRAINT `user_workflows_id` PRIMARY KEY(`id`)\n)",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2WGA22TR5N397xU.6ea51793960e --database 5a8cTZiVdVtergiPGoN2Fo --execute CREATE TABLE IF NOT EXISTS `user_workflows` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `userId` int NOT NULL,\n  `workflowId` int NOT NULL,\n  `active` boolean NOT NULL DEFAULT true,\n  `activatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `deactivatedAt` timestamp,\n  CONSTRAINT `user_workflows_id` PRIMARY KEY(`id`)\n)",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 60
+}

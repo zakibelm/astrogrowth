@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `workflows` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `workflowId` varchar(100) NOT NULL UNIQUE,\n  `name` varchar(255) NOT NULL,\n  `description` text NOT NULL,\n  `icon` varchar(10) NOT NULL,\n  `targetSector` varchar(100) NOT NULL,\n  `agentIds` json NOT NULL,\n  `estimatedTimeSaved` varchar(50),\n  `estimatedROI` varchar(50),\n  `monthlyPrice` int,\n  `isActive` boolean NOT NULL DEFAULT true,\n  `sortOrder` int NOT NULL DEFAULT 0,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `workflows_id` PRIMARY KEY(`id`)\n)",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2WGA22TR5N397xU.6ea51793960e --database 5a8cTZiVdVtergiPGoN2Fo --execute CREATE TABLE IF NOT EXISTS `workflows` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `workflowId` varchar(100) NOT NULL UNIQUE,\n  `name` varchar(255) NOT NULL,\n  `description` text NOT NULL,\n  `icon` varchar(10) NOT NULL,\n  `targetSector` varchar(100) NOT NULL,\n  `agentIds` json NOT NULL,\n  `estimatedTimeSaved` varchar(50),\n  `estimatedROI` varchar(50),\n  `monthlyPrice` int,\n  `isActive` boolean NOT NULL DEFAULT true,\n  `sortOrder` int NOT NULL DEFAULT 0,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `workflows_id` PRIMARY KEY(`id`)\n)",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 76
+}

@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `user_agents` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `userId` int NOT NULL,\n  `agentId` varchar(100) NOT NULL,\n  `enabled` boolean NOT NULL DEFAULT false,\n  `llmModel` varchar(50) NOT NULL DEFAULT 'gemini-2.0-flash',\n  `systemPrompt` text,\n  `ragDocuments` json,\n  `config` json,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `user_agents_id` PRIMARY KEY(`id`)\n)",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2WGA22TR5N397xU.6ea51793960e --database 5a8cTZiVdVtergiPGoN2Fo --execute CREATE TABLE IF NOT EXISTS `user_agents` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `userId` int NOT NULL,\n  `agentId` varchar(100) NOT NULL,\n  `enabled` boolean NOT NULL DEFAULT false,\n  `llmModel` varchar(50) NOT NULL DEFAULT 'gemini-2.0-flash',\n  `systemPrompt` text,\n  `ragDocuments` json,\n  `config` json,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `user_agents_id` PRIMARY KEY(`id`)\n)",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 515
+}

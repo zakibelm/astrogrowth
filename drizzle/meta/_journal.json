@@ -29,6 +29,20 @@
       "when": 1766615916189,
       "tag": "0003_rich_shockwave",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1766631837841,
+      "tag": "0004_wakeful_tusk",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1766631858921,
+      "tag": "0005_solid_eddie_brock",
+      "breakpoints": true
     }
   ]
 }

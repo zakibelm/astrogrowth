@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -826,7 +827,7 @@ const AGENTS: Agent[] = [
 ];
 
 export default function AgentsTeamFull() {
-  const [, setLocation] = useLocation();
+  const [, navigate] = useLocation();
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
   const [configOpen, setConfigOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -892,7 +893,7 @@ export default function AgentsTeamFull() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setLocation("/")}
+                onClick={() => navigate("/")}
                 className="hover:bg-slate-100"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -907,10 +908,21 @@ export default function AgentsTeamFull() {
                 </p>
               </div>
             </div>
-            <Badge variant="secondary" className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0">
-              <Sparkles className="h-3 w-3 mr-1" />
-              {AGENTS.filter(a => a.status === "active").length} actifs
-            </Badge>
+            <div className="flex items-center gap-3">
+              <Badge variant="secondary" className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0">
+                <Sparkles className="h-3 w-3 mr-1" />
+                {AGENTS.filter(a => a.status === "active").length} actifs
+              </Badge>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate("/workflows")}
+                className="gap-2"
+              >
+                <Sparkles className="h-4 w-4" />
+                Workflows Templates
+              </Button>
+            </div>
           </div>
 
           {/* Barre de recherche */}
@@ -977,16 +989,19 @@ export default function AgentsTeamFull() {
                         {agent.emoji}
                       </div>
                       <div className="flex flex-col items-end gap-2">
-                        <Badge
-                          variant={agent.status === "active" ? "default" : "secondary"}
-                          className={agent.status === "active" ? "bg-green-500 hover:bg-green-600" : ""}
-                        >
-                          {agent.status === "active" ? (
-                            <><CheckCircle className="h-3 w-3 mr-1" /> Actif</>
-                          ) : (
-                            <><AlertCircle className="h-3 w-3 mr-1" /> Inactif</>
-                          )}
-                        </Badge>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-slate-600">
+                            {agent.status === "active" ? "Actif" : "Inactif"}
+                          </span>
+                          <Switch
+                            checked={agent.status === "active"}
+                            onCheckedChange={(checked) => {
+                              // TODO: Call tRPC mutation
+                              toast.success(checked ? `${agent.name} activé` : `${agent.name} désactivé`);
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                        </div>
                         <Button
                           size="sm"
                           variant="ghost"
