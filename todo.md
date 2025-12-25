@@ -734,3 +734,10 @@ Selon les maquettes fournies :
 - [x] Stocker prompt système workflow
 - [ ] Permettre édition workflow après création
 - [ ] Permettre activation workflow personnalisé
+
+
+## 🐛 CORRECTION ERREUR REACT KEY
+
+- [x] Corriger l'erreur "Each child in a list should have a unique key prop" dans WorkflowCreator
+- [x] Ajouter keys uniques sur filteredAgents.map()
+- [x] Vérifier toutes les listes dans le composant

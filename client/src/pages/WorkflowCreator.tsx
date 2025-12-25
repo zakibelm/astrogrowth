@@ -253,7 +253,7 @@ export default function WorkflowCreator() {
 
                   <div className="space-y-2 max-h-[600px] overflow-y-auto">
                     {filteredAgents.map((agent) => (
-                      <DraggableAgent key={agent.id} agent={agent} />
+                      <DraggableAgent key={agent.name} agent={agent} />
                     ))}
                   </div>
                 </CardContent>
