@@ -76,6 +76,34 @@ export const userWorkflows = mysqlTable("user_workflows", {
   userId: int("userId").notNull(),
   workflowId: int("workflowId").notNull(), // References workflows.id
   
+  // Configuration
+  workflowConfig: json("workflowConfig").$type<{
+    businessInfo?: {
+      businessName: string;
+      address: string;
+      city: string;
+      province: string;
+      postalCode: string;
+      phone: string;
+      website: string;
+      sector: string;
+      description: string;
+    };
+    marketingGoals?: {
+      primaryGoal: string;
+      leadsPerMonth: string;
+      budget: string;
+      targetAudience: string;
+      uniqueSellingPoint: string;
+    };
+    agentPreferences?: {
+      contentTone: string;
+      postingFrequency: string;
+      responseTime: string;
+      customInstructions: string;
+    };
+  }>(),
+  
   // Status
   active: boolean("active").default(true).notNull(),
   

@@ -2,6 +2,7 @@ import { eq, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { userAgents, workflows, userWorkflows } from "../drizzle/schema";
 import type { InsertUserAgent, InsertWorkflow, InsertUserWorkflow } from "../drizzle/schema";
+import { personalizeWorkflowAgents } from "./agent-personalization";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -127,7 +128,15 @@ export async function getUserWorkflows(userId: number) {
   return await db.select().from(userWorkflows).where(eq(userWorkflows.userId, userId));
 }
 
-export async function activateWorkflow(userId: number, workflowId: number) {
+export async function activateWorkflow(
+  userId: number,
+  workflowId: number,
+  config?: {
+    businessInfo?: any;
+    marketingGoals?: any;
+    agentPreferences?: any;
+  }
+) {
   // Check if already activated
   const existing = await db
     .select()
@@ -147,6 +156,7 @@ export async function activateWorkflow(userId: number, workflowId: number) {
       userId,
       workflowId,
       active: true,
+      workflowConfig: config,
     });
   }
   
@@ -156,10 +166,40 @@ export async function activateWorkflow(userId: number, workflowId: number) {
     throw new Error("Workflow not found");
   }
   
-  // Enable all agents in this workflow
+    // Generate personalized prompts for all agents
   const agentIds = workflow.agentIds as string[];
+  const personalizedPrompts = personalizeWorkflowAgents(agentIds, config || {});
+  
+  // Activate all agents in the workflow with personalized prompts
   for (const agentId of agentIds) {
-    await toggleUserAgent(userId, agentId, true);
+    const personalizedPrompt = personalizedPrompts[agentId];
+    
+    // Check if agent already exists
+    const existing = await db
+      .select()
+      .from(userAgents)
+      .where(and(eq(userAgents.userId, userId), eq(userAgents.agentId, agentId)))
+      .limit(1);
+    
+    if (existing.length > 0) {
+      // Update existing agent
+      await db
+        .update(userAgents)
+        .set({
+          enabled: true,
+          systemPrompt: personalizedPrompt,
+        })
+        .where(and(eq(userAgents.userId, userId), eq(userAgents.agentId, agentId)));
+    } else {
+      // Create new agent with personalized prompt
+      await db.insert(userAgents).values({
+        userId,
+        agentId,
+        enabled: true,
+        systemPrompt: personalizedPrompt,
+        llmModel: "gemini-2.0-flash-exp",
+      });
+    }
   }
   
   return { success: true };

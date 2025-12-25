@@ -554,3 +554,42 @@ Selon les maquettes fournies :
 - [ ] Animations de ripple sur click
 - [x] Ombres dynamiques sur hover
 
+
+
+## 🎯 PERSONNALISATION WORKFLOWS (PRIORITÉ CRITIQUE)
+
+### Questionnaire Configuration Workflow
+- [x] Créer page /workflows/:id/configure avec formulaire multi-étapes
+- [x] Étape 1: Informations entreprise (nom, adresse, site web, téléphone)
+- [x] Étape 2: Objectifs marketing (leads/mois, budget, KPIs)
+- [x] Étape 3: Questions spécifiques au workflow choisi
+- [x] Étape 4: Configuration agents individuels (personnaliser prompts)
+- [x] Validation et sauvegarde configuration en DB
+
+### Schema Business Profile
+- [x] Ajouter champs workflow_config dans table user_workflows (JSON)
+- [x] Stocker: businessInfo, marketingGoals, agentConfigs, customPrompts
+- [ ] Créer table workflow_agent_configs pour config détaillée par agent
+
+### Page "Mon Workflow Actif"
+- [x] Créer page /my-workflow avec dashboard personnalisé
+- [x] Section "Informations Business" (éditable)
+- [x] Section "Agents Actifs" avec liste et statut
+- [x] Section "Tâches en Cours" par agent (scraping, génération, publication)
+- [x] Section "Résultats Générés" (leads, contenus, publications)
+- [ ] Bouton "Modifier Configuration" pour chaque agent
+
+### Personnalisation Automatique Agents
+- [x] Injecter infos business dans prompts système de chaque agent
+- [x] Template: "Tu travailles pour {businessName}, situé à {address}, site web {website}"
+- [x] Ajouter objectifs: "Objectif: générer {leadsGoal} leads/mois dans le secteur {sector}"
+- [ ] Permettre override manuel du prompt par l'utilisateur
+- [x] Sauvegarder versions personnalisées des prompts
+
+### Vue Claire Activité Agents
+- [x] Dashboard temps réel montrant ce que fait chaque agent
+- [x] "Lead Scraper: 15 leads trouvés aujourd'hui"
+- [x] "Copywriter: 3 posts générés en attente d'approbation"
+- [x] "Community Manager: 12 commentaires répondus"
+- [x] Timeline d'activité avec horodatage
+- [ ] Logs détaillés accessibles par agent

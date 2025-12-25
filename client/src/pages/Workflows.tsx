@@ -131,11 +131,11 @@ export default function Workflows() {
                         className="gap-2"
                         onClick={(e) => {
                           e.stopPropagation();
-                          openWorkflowDetails(workflow);
+                          navigate(`/workflows/${workflow.id}/configure`);
                         }}
                       >
                         <Sparkles className="h-4 w-4" />
-                        Activer
+                        Configurer
                       </Button>
                     </div>
                   </div>
@@ -212,20 +212,10 @@ export default function Workflows() {
                 <Button
                   size="lg"
                   className="w-full gap-2"
-                  onClick={activateWorkflow}
-                  disabled={activateWorkflowMutation.isPending}
+                  onClick={() => navigate(`/workflows/${selectedWorkflow.id}/configure`)}
                 >
-                  {activateWorkflowMutation.isPending ? (
-                    <>
-                      <Sparkles className="h-5 w-5 animate-spin" />
-                      Activation en cours...
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles className="h-5 w-5" />
-                      Activer ce workflow
-                    </>
-                  )}
+                  <Sparkles className="h-5 w-5" />
+                  Configurer ce workflow
                 </Button>
                 <p className="text-xs text-slate-600 mt-3">
                   Tous les agents seront automatiquement activés

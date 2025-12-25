@@ -43,6 +43,13 @@
       "when": 1766631858921,
       "tag": "0005_solid_eddie_brock",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1766633163574,
+      "tag": "0006_glamorous_terror",
+      "breakpoints": true
     }
   ]
 }

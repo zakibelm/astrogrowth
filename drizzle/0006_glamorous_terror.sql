@@ -1,0 +1,1 @@
+ALTER TABLE `user_workflows` ADD `workflowConfig` json;

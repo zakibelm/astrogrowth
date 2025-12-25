@@ -298,9 +298,35 @@ export const appRouter = router({
     activate: protectedProcedure
       .input(z.object({
         workflowId: z.number(),
+        config: z.object({
+          businessInfo: z.object({
+            businessName: z.string(),
+            address: z.string(),
+            city: z.string(),
+            province: z.string(),
+            postalCode: z.string(),
+            phone: z.string(),
+            website: z.string(),
+            sector: z.string(),
+            description: z.string(),
+          }).optional(),
+          marketingGoals: z.object({
+            primaryGoal: z.string(),
+            leadsPerMonth: z.string(),
+            budget: z.string(),
+            targetAudience: z.string(),
+            uniqueSellingPoint: z.string(),
+          }).optional(),
+          agentPreferences: z.object({
+            contentTone: z.string(),
+            postingFrequency: z.string(),
+            responseTime: z.string(),
+            customInstructions: z.string(),
+          }).optional(),
+        }).optional(),
       }))
       .mutation(async ({ ctx, input }) => {
-        return await dbAgents.activateWorkflow(ctx.user.id, input.workflowId);
+        return await dbAgents.activateWorkflow(ctx.user.id, input.workflowId, input.config);
       }),
     
     deactivate: protectedProcedure
