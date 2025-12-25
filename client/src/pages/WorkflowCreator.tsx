@@ -13,6 +13,7 @@ import { ArrowLeft, Save, Sparkles, DollarSign, ArrowRight, X, Plus } from "luci
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { AGENTS_DATA, DEPARTMENTS, type AgentData } from "@/../../shared/agents-data";
+import { DraggableWorkflowAgent } from "@/components/DraggableWorkflowAgent";
 
 interface WorkflowAgent {
   id: string;
@@ -290,10 +291,17 @@ export default function WorkflowCreator() {
 
                   <div>
                     <Label htmlFor="mission">Mission du Workflow *</Label>
+                    <div className="mb-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <p className="text-sm text-blue-900">
+                        <strong>Instructions pour l'Orchestrateur IA :</strong> Décrivez précisément la mission que ce workflow doit accomplir. 
+                        L'orchestrateur utilisera ces informations pour coordonner les agents, assigner les rôles selon les bonnes pratiques, 
+                        et s'assurer que le travail est bien fait.
+                      </p>
+                    </div>
                     <Textarea
                       id="mission"
-                      placeholder="Décrivez la mission globale de ce workflow : objectif, résultat attendu, KPIs..."
-                      rows={4}
+                      placeholder="Ex: Générer 50 leads qualifiés/mois pour restaurant italien à Montréal via Instagram + Google Maps. Critères de succès: leads avec email + téléphone, intéressés par cuisine italienne, budget 50-100$/personne. L'orchestrateur doit coordonner le scraping, la qualification, la création de contenu attractif, et la publication optimisée aux heures de pointe (12h-14h, 18h-21h)."
+                      rows={6}
                       value={workflowMission}
                       onChange={(e) => setWorkflowMission(e.target.value)}
                     />
@@ -326,11 +334,16 @@ export default function WorkflowCreator() {
 
                         return (
                           <div key={`${wa.id}-${index}`} className="space-y-3">
-                            <DraggableAgent
+                            <DraggableWorkflowAgent
                               agent={agent}
                               index={index}
                               onRemove={() => removeAgent(index)}
-                              isInWorkflow
+                              onMove={(fromIndex, toIndex) => {
+                                const newAgents = [...workflowAgents];
+                                const [movedAgent] = newAgents.splice(fromIndex, 1);
+                                newAgents.splice(toIndex, 0, movedAgent);
+                                setWorkflowAgents(newAgents);
+                              }}
                             />
                             
                             {/* Arrow between agents */}

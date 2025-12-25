@@ -741,3 +741,26 @@ Selon les maquettes fournies :
 - [x] Corriger l'erreur "Each child in a list should have a unique key prop" dans WorkflowCreator
 - [x] Ajouter keys uniques sur filteredAgents.map()
 - [x] Vérifier toutes les listes dans le composant
+
+
+## 🔄 AMÉLIORATION WORKFLOW BUILDER
+
+### Réorganisation Drag & Drop Canvas
+- [x] Permettre drag & drop ENTRE agents dans le canvas
+- [x] Glisser Agent 3 avant Agent 1 pour changer l'ordre
+- [x] Utiliser type "workflow-agent" distinct de "agent"
+- [x] Animation smooth lors du réordonnancement
+- [x] Mise à jour automatique de la numérotation
+
+### Prompt Système Enrichi Orchestrateur
+- [x] Section dédiée "Instructions pour l'Orchestrateur"
+- [x] Expliquer comment coordonner les agents
+- [x] Définir les critères de succès du workflow
+- [x] Gestion des erreurs et fallbacks
+- [x] Format structuré pour le prompt système
+
+### Visualisation Rôles Agents
+- [x] Afficher sous chaque agent son rôle dans la mission
+- [x] Badge "Rôle: Lead Generation" sous l'agent
+- [ ] Highlight connexions entre agents (output → input)
+- [ ] Suggestions d'ordre optimal selon bonnes pratiques
