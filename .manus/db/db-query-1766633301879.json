@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO workflows (workflowId, name, description, icon, agentIds, monthlyPrice, targetSector) VALUES \n('reels-creator', 'Créateur de Reels', 'Génération automatique de Reels courts (15-60s) avec Veo 3 pour Instagram, TikTok et YouTube Shorts', '🎬', '[\"scriptwriter-reels\", \"veo3-generator\", \"video-editor-reels\", \"hashtag-optimizer-video\", \"multi-platform-publisher\"]', 89900, 'Créateurs de contenu, influenceurs, marques'),\n('stories-creator', 'Créateur de Stories', 'Stories verticales (9:16) générées avec Wan 2 pour Instagram et Facebook', '📱', '[\"story-designer\", \"wan2-generator\", \"text-overlay-agent\", \"music-selector\", \"auto-publisher-stories\"]', 69900, 'Marques, e-commerce, influenceurs')",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2WGA22TR5N397xU.6ea51793960e --database 5a8cTZiVdVtergiPGoN2Fo --execute INSERT INTO workflows (workflowId, name, description, icon, agentIds, monthlyPrice, targetSector) VALUES \n('reels-creator', 'Créateur de Reels', 'Génération automatique de Reels courts (15-60s) avec Veo 3 pour Instagram, TikTok et YouTube Shorts', '🎬', '[\"scriptwriter-reels\", \"veo3-generator\", \"video-editor-reels\", \"hashtag-optimizer-video\", \"multi-platform-publisher\"]', 89900, 'Créateurs de contenu, influenceurs, marques'),\n('stories-creator', 'Créateur de Stories', 'Stories verticales (9:16) générées avec Wan 2 pour Instagram et Facebook', '📱', '[\"story-designer\", \"wan2-generator\", \"text-overlay-agent\", \"music-selector\", \"auto-publisher-stories\"]', 69900, 'Marques, e-commerce, influenceurs')",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 63
+}

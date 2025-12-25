@@ -593,3 +593,29 @@ Selon les maquettes fournies :
 - [x] "Community Manager: 12 commentaires répondus"
 - [x] Timeline d'activité avec horodatage
 - [ ] Logs détaillés accessibles par agent
+
+
+## 🎬 WORKFLOWS VIDÉO (VEO 3 & WAN 2)
+
+### Workflow Créateur de Reels (Veo 3)
+- [x] Créer workflow "reels-creator" dans la base de données
+- [x] Agent Scriptwriter Reels (scripts 15-60s optimisés)
+- [x] Agent Veo 3 Generator (génération vidéo avec Veo 3)
+- [x] Agent Video Editor (montage, transitions, effets)
+- [x] Agent Hashtag Optimizer (hashtags viraux)
+- [x] Agent Multi-Platform Publisher (Instagram, TikTok, YouTube Shorts)
+
+### Workflow Créateur de Stories (Wan 2)
+- [x] Créer workflow "stories-creator" dans la base de données
+- [x] Agent Story Designer (design stories verticales 9:16)
+- [x] Agent Wan 2 Generator (génération vidéo rapide avec Wan 2)
+- [x] Agent Text Overlay (ajout texte animé)
+- [x] Agent Music Selector (musique tendance)
+- [x] Agent Auto-Publisher Stories (Instagram, Facebook)
+
+### Intégration APIs Vidéo
+- [ ] Intégrer API Veo 3 pour génération Reels (backend)
+- [ ] Intégrer API Wan 2 pour génération Stories (backend)
+- [ ] Configurer paramètres vidéo (résolution, durée, format)
+- [ ] Gestion file d'attente génération vidéo
+- [ ] Stockage vidéos générées sur S3
