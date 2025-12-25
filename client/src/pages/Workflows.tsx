@@ -7,11 +7,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { ArrowLeft, Check, Sparkles, TrendingUp, Clock } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { useCurrency } from "@/hooks/useCurrency";
 
 export default function Workflows() {
   const [, navigate] = useLocation();
   const [selectedWorkflow, setSelectedWorkflow] = useState<any>(null);
   const [showDialog, setShowDialog] = useState(false);
+  const { formatPrice, selectedCurrency } = useCurrency();
 
   // Fetch workflows
   const { data: workflows = [], isLoading } = trpc.workflows.list.useQuery();
@@ -123,8 +125,8 @@ export default function Workflows() {
                   <div className="pt-3 border-t border-slate-200">
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-2xl font-bold text-primary">{price}$</div>
-                        <div className="text-xs text-slate-500">CAD/mois</div>
+                        <div className="text-2xl font-bold text-primary">{formatPrice((workflow.monthlyPrice || 0) / 100)}</div>
+                        <div className="text-xs text-slate-500">{selectedCurrency}/mois</div>
                       </div>
                       <Button
                         size="sm"

@@ -636,3 +636,35 @@ Selon les maquettes fournies :
 - [x] Format: "MISSION WORKFLOW: {workflowMission} - Ton rôle dans cette mission: {agent-specific-role}"
 - [x] Assurer cohérence entre tous les agents du même workflow
 - [x] Permettre aux agents de référencer la mission dans leurs décisions
+
+
+## 🌍 INTERNATIONALISATION
+
+### Sélecteur Pays et Téléphone International
+- [x] Ajouter liste complète de 50+ pays majeurs dans WorkflowConfigure
+- [x] Remplacer champ "Province" par "State/Province/Region" dynamique selon pays
+- [x] Ajouter sélecteur indicatif téléphonique (+33, +1, +44, +971, etc.)
+- [ ] Validation format téléphone selon pays sélectionné
+- [x] Adapter format code postal selon pays (ZIP, Postal Code, etc.)
+
+### Multi-Devises
+- [x] Ajouter sélecteur devise (USD, EUR, GBP, CAD, AED, etc.)
+- [x] Stocker devise préférée dans localStorage (via useCurrency hook)
+- [x] Afficher prix workflows dans devise sélectionnée
+- [x] Taux de conversion automatique (taux fixes)
+- [x] Format monétaire adapté ($ avant/après, espace, virgule/point)
+
+### Support Multi-Langues (FR, EN, AR)
+- [x] Intégrer bibliothèque i18n (react-i18next)
+- [x] Créer fichiers traduction: fr.json, en.json, ar.json
+- [ ] Traduire interface complète (navigation, formulaires, messages)
+- [ ] Sélecteur langue dans header (FR par défaut)
+- [ ] Support RTL pour arabe (direction: rtl)
+- [ ] Stocker préférence langue dans localStorage
+
+### Exemples Internationaux
+- [x] Remplacer "Montréal, Québec" par exemples variés
+- [x] Exemples: Paris, New York, Dubai dans placeholders
+- [x] Adapter secteurs d'activité pour marché international (10 secteurs)
+- [ ] Workflows templates avec exemples multi-pays
+- [ ] Témoignages clients internationaux

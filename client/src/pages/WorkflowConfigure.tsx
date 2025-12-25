@@ -10,6 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight, Check, Building2, Target, Users, Sparkles } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { COUNTRIES, CURRENCIES } from "@/../../shared/countries";
 
 export default function WorkflowConfigure() {
   const { id } = useParams<{ id: string }>();
@@ -20,14 +21,17 @@ export default function WorkflowConfigure() {
   // Form state
   const [businessInfo, setBusinessInfo] = useState({
     businessName: "",
+    country: "FR", // Default France
     address: "",
     city: "",
     province: "",
     postalCode: "",
+    dialCode: "+33", // Default France
     phone: "",
     website: "",
     sector: "",
     description: "",
+    currency: "EUR", // Default Euro
   });
 
   const [marketingGoals, setMarketingGoals] = useState({
@@ -176,39 +180,54 @@ export default function WorkflowConfigure() {
                     onChange={(e) => setBusinessInfo({ ...businessInfo, address: e.target.value })}
                   />
                 </div>
-                <div>
-                  <Label htmlFor="city">Ville *</Label>
-                  <Input
-                    id="city"
-                    placeholder="Montréal"
-                    value={businessInfo.city}
-                    onChange={(e) => setBusinessInfo({ ...businessInfo, city: e.target.value })}
-                  />
-                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="country">Pays *</Label>
+                <Select 
+                  value={businessInfo.country} 
+                  onValueChange={(value) => {
+                    const country = COUNTRIES.find(c => c.code === value);
+                    if (country) {
+                      setBusinessInfo({ 
+                        ...businessInfo, 
+                        country: value,
+                        dialCode: country.dialCode,
+                        currency: country.currency
+                      });
+                    }
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Sélectionner votre pays" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-[300px]">
+                    {COUNTRIES.map((country) => (
+                      <SelectItem key={country.code} value={country.code}>
+                        {country.name} ({country.dialCode})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="province">Province</Label>
-                  <Select value={businessInfo.province} onValueChange={(value) => setBusinessInfo({ ...businessInfo, province: value })}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Sélectionner" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="QC">Québec</SelectItem>
-                      <SelectItem value="ON">Ontario</SelectItem>
-                      <SelectItem value="BC">Colombie-Britannique</SelectItem>
-                      <SelectItem value="AB">Alberta</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="city">Ville *</Label>
+                  <Input
+                    id="city"
+                    placeholder="Paris, New York, Dubai..."
+                    value={businessInfo.city}
+                    onChange={(e) => setBusinessInfo({ ...businessInfo, city: e.target.value })}
+                  />
                 </div>
                 <div>
-                  <Label htmlFor="postalCode">Code postal</Label>
+                  <Label htmlFor="province">Province/État/Région</Label>
                   <Input
-                    id="postalCode"
-                    placeholder="H2X 1Y7"
-                    value={businessInfo.postalCode}
-                    onChange={(e) => setBusinessInfo({ ...businessInfo, postalCode: e.target.value })}
+                    id="province"
+                    placeholder="Île-de-France, California, Dubai..."
+                    value={businessInfo.province}
+                    onChange={(e) => setBusinessInfo({ ...businessInfo, province: e.target.value })}
                   />
                 </div>
               </div>
@@ -216,22 +235,53 @@ export default function WorkflowConfigure() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="phone">Téléphone *</Label>
-                  <Input
-                    id="phone"
-                    placeholder="(514) 555-1234"
-                    value={businessInfo.phone}
-                    onChange={(e) => setBusinessInfo({ ...businessInfo, phone: e.target.value })}
-                  />
+                  <div className="flex gap-2">
+                    <Select value={businessInfo.dialCode} onValueChange={(value) => setBusinessInfo({ ...businessInfo, dialCode: value })}>
+                      <SelectTrigger className="w-[120px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-[300px]">
+                        {COUNTRIES.map((country) => (
+                          <SelectItem key={country.code} value={country.dialCode}>
+                            {country.dialCode}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      id="phone"
+                      placeholder="123456789"
+                      value={businessInfo.phone}
+                      onChange={(e) => setBusinessInfo({ ...businessInfo, phone: e.target.value })}
+                      className="flex-1"
+                    />
+                  </div>
                 </div>
                 <div>
-                  <Label htmlFor="website">Site web</Label>
-                  <Input
-                    id="website"
-                    placeholder="https://www.example.com"
-                    value={businessInfo.website}
-                    onChange={(e) => setBusinessInfo({ ...businessInfo, website: e.target.value })}
-                  />
+                  <Label htmlFor="currency">Devise préférée</Label>
+                  <Select value={businessInfo.currency} onValueChange={(value) => setBusinessInfo({ ...businessInfo, currency: value })}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CURRENCIES.map((curr) => (
+                        <SelectItem key={curr.code} value={curr.code}>
+                          {curr.symbol} {curr.code} - {curr.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
+              </div>
+
+              <div>
+                <Label htmlFor="website">Site web</Label>
+                <Input
+                  id="website"
+                  placeholder="https://www.example.com"
+                  value={businessInfo.website}
+                  onChange={(e) => setBusinessInfo({ ...businessInfo, website: e.target.value })}
+                />
               </div>
 
               <div>
@@ -241,13 +291,17 @@ export default function WorkflowConfigure() {
                     <SelectValue placeholder="Sélectionner votre secteur" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="restaurant">Restaurant</SelectItem>
-                    <SelectItem value="ecommerce">E-commerce</SelectItem>
-                    <SelectItem value="b2b">Services B2B</SelectItem>
-                    <SelectItem value="sante">Santé (dentiste, médecin)</SelectItem>
-                    <SelectItem value="immobilier">Immobilier</SelectItem>
-                    <SelectItem value="consulting">Consultation/Coaching</SelectItem>
-                    <SelectItem value="autre">Autre</SelectItem>
+                    <SelectItem value="restaurant">Restaurant & Hospitality</SelectItem>
+                    <SelectItem value="ecommerce">E-commerce & Retail</SelectItem>
+                    <SelectItem value="b2b">B2B Services & SaaS</SelectItem>
+                    <SelectItem value="sante">Healthcare & Wellness</SelectItem>
+                    <SelectItem value="immobilier">Real Estate & Property</SelectItem>
+                    <SelectItem value="consulting">Consulting & Coaching</SelectItem>
+                    <SelectItem value="finance">Finance & Insurance</SelectItem>
+                    <SelectItem value="education">Education & Training</SelectItem>
+                    <SelectItem value="technology">Technology & IT</SelectItem>
+                    <SelectItem value="creative">Creative & Media</SelectItem>
+                    <SelectItem value="autre">Other</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
